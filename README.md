@@ -8,7 +8,8 @@ The main goal of this web application is to help PhotoClub with their work of up
 - Hamza Alshaikhi
 - Abdulrahman Amin
 - Abdulaziz ALtamimi
-- Mohammed ALamri
+- Mohammed alamri
+
 
 
 ## 
