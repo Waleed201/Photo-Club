@@ -1,0 +1,98 @@
+@font-face {
+    font-family: 'Inter';
+    src: url('fonts/Inter-Thin.ttf') format('truetype');
+    font-weight: 100;
+}
+
+
+body {
+    background-color: #141414;
+    margin: 0;
+}
+
+header {
+    background-color: #222222;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+header img {
+    width: 70px;
+    height: 66px;
+    flex-shrink: 0;
+    margin: 3px 10px;
+}
+
+header h1,
+header h2 {
+    margin: 0;
+    flex-shrink: 0;
+    color: #E8E8E8;
+    font-family: 'Inter Light', sans-serif;
+    line-height: normal;
+}
+
+header h1 {
+    font-size: 29px;
+    font-weight: 700;
+}
+
+header h2 {
+    font-size: 27px;
+    font-weight: 400;
+}
+
+header>svg {
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    color: #E8E8E8;
+    gap: 10px;
+    height: 100%;
+    width: 65%;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background-color: #373737;
+    opacity: 0;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transform: translateX(100%);
+    transition: all 700ms cubic-bezier(.9, 0, .33, 1);
+}
+
+.menu.fade-in {
+    opacity: 0.9;
+    transform: translateX(0px);
+}
+
+
+
+.menu svg:nth-child(1) {
+    font-size: 50px;
+}
+
+.menu a {
+    /* display: block; */
+    border-top: #E8E8E8 solid 2px;
+    font-size: large;
+    color: #E8E8E8;
+    text-decoration: none;
+    padding: 5px;
+}
+
+.bi-person-circle {
+    font-size: 100px;
+    align-self: center;
+    margin: 10px;
+}
+
+.bi-x-circle-fill {
+    font-size: 27px;
+    width: 28px;
+}
