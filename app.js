@@ -4,10 +4,10 @@ const path = require('path')
 const app = express()
 
 // setup static and middleware
-app.use(express.static('./public'))
+app.use(express.static('./SWE363 Project/public'))
 
 app.get('/', (req, res) => {
-  res.sendFile(path.resolve(__dirname, './html/index.html'))
+  res.sendFile(path.resolve(__dirname, './SWE363 Project/html/index.html'))
 })
 
 app.all('*', (req, res) => {
