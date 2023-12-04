@@ -1,6 +1,6 @@
 // Create header content
 const headerContent = `
-    <img src="./photo club icon.png" alt="KFUPM Photo club icon">
+    <img src="./photo-club-icon.ico" alt="KFUPM Photo club icon">
     <span>
         <h1>KFUPM</h1>
         <h2>PHOTOCLUB</h2>
@@ -12,11 +12,12 @@ const headerContent = `
     </svg>
     <div class="menu" id="dropdownMenu">
         <i id="xIcon" class="bi bi-x-circle-fill"></i>
-        <i class="bi bi-person-circle"></i>
+        <i id="profileIcon" class="bi bi-person-circle"></i>
+        <a href="#">Home</a>
         <a href="#">Events</a>
-        <a href="#">News</a>
+        <a href="#">Announcements</a>
         <a href="#">About Photo Club</a>
-        <a href="#">Join Photo Club</a>
+        <a href="register.html">Join Photo Club</a>
     </div>
 `;
 
@@ -36,3 +37,6 @@ function toggleMenu() {
     menu.classList.toggle('fade-in');
 }
 
+document.getElementById("profileIcon").addEventListener("click",function(){
+    window.location.href = 'login.html';
+})

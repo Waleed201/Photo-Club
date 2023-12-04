@@ -4,10 +4,10 @@
     font-weight: 100;
 }
 
-
 body {
     background-color: #141414;
     margin: 0;
+    overflow-x: hidden;
 }
 
 header {
@@ -25,7 +25,7 @@ header img {
 }
 
 header h1,
-header h2 {
+header h2 ,h3 {
     margin: 0;
     flex-shrink: 0;
     color: #E8E8E8;
@@ -43,22 +43,29 @@ header h2 {
     font-weight: 400;
 }
 
+h3 {
+    font-size: 29px;
+    font-weight: 600;
+}
+
+
 header>svg {
     margin-left: auto;
     cursor: pointer;
 }
 
 .menu {
-    display: flex;
+    display: none;
     flex-direction: column;
     color: #E8E8E8;
+    z-index: 1;
     gap: 10px;
     height: 100%;
     width: 65%;
     position: absolute;
     top: 0px;
     right: 0px;
-    background-color: #373737;
+    background-color: #282828;
     opacity: 0;
     padding: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -67,11 +74,10 @@ header>svg {
 }
 
 .menu.fade-in {
+    display: flex;
     opacity: 0.9;
     transform: translateX(0px);
 }
-
-
 
 .menu svg:nth-child(1) {
     font-size: 50px;
@@ -96,3 +102,18 @@ header>svg {
     font-size: 27px;
     width: 28px;
 }
+
+section {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 10px 10%;
+}
+
+section>div {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
