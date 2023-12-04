@@ -1,6 +1,6 @@
 // Create header content
 const headerContent = `
-    <img src="../Images/WhatsApp Image 2023-04-08 at 11.18.42 PM copy.png" alt="KFUPM Photo club icon">
+    <img src="./photo club icon.png" alt="KFUPM Photo club icon">
     <span>
         <h1>KFUPM</h1>
         <h2>PHOTOCLUB</h2>
