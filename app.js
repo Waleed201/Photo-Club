@@ -8,6 +8,7 @@ app.use(express.static('./SWE363 Project/css'))
 app.use(express.static('./SWE363 Project/fonts'))
 app.use(express.static('./SWE363 Project/JS'))
 app.use(express.static('./SWE363 Project/images'))
+app.use(express.static('./SWE363 Project/html'))
 
 
 app.get('/', (req, res) => {

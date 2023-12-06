@@ -12,7 +12,7 @@ const headerContent = `
     </svg>
     <div class="menu" id="dropdownMenu">
         <i id="xIcon" class="bi bi-x-circle-fill"></i>
-        <i class="bi bi-person-circle"></i>
+        <i id="profileIcon" class="bi bi-person-circle"></i>
         <a href="#">Home</a>
         <a href="#">Events</a>
         <a href="#">News</a>
@@ -37,3 +37,6 @@ function toggleMenu() {
     menu.classList.toggle('fade-in');
 }
 
+document.getElementById("profileIcon").addEventListener("click",function(){
+    window.location.href = 'login.html';
+})
