@@ -1,0 +1,49 @@
+.eventCard {
+    width: 365px;
+    height: 116px;
+    flex-shrink: 0;
+    background-color: #222222;
+    color: #E8E8E8;
+    border-radius: 18px;
+    padding: 10px;
+}
+
+
+
+.eventCard .cardTitle {
+    /* color: #E8E8E8; */
+    /* font-family: Inter; */
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+
+    font-family: 'Inter', sans-serif;
+
+}
+
+
+.eventCard .cardcontent {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    opacity: 0.57;
+}
+
+
+
+
+.eventCard .cardDetails {
+    display: flex;
+    justify-content: space-between;
+    opacity: 0.57;
+
+}
+
+.eventCard .cardDetails>span {
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

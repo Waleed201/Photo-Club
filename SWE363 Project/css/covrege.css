@@ -1,0 +1,43 @@
+.coverageCard {
+    width: 365px;
+    height: 269px;
+    flex-shrink: 0;
+    background-color: #222222;
+    border-radius: 18px;
+
+}
+
+.coverageCard img {
+    width: 365px;
+    height: 208px;
+    flex-shrink: 0;
+    object-fit: cover;
+
+    border-radius: 18px 18px 0px 0px;
+    background: url(./WhatsApp\ Image\ 2023-04-08\ at\ 11.18.42\ PM.jpeg), lightgray 50% / cover no-repeat;
+}
+
+.coverageCard .cardTitle {
+    /* width: 340px;
+    height: 26px; */
+    flex-shrink: 0;
+    font-size: 20px;
+    color: #E8E8E8;
+    margin: 5px 10px;
+    font-family: 'Inter', sans-serif;
+
+}
+
+.coverageCard .cardDate {
+    /* width: 91px;
+    height: 13px; */
+    flex-shrink: 0;
+
+    color: #E8E8E8;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: normal;
+    margin: 5px 20px;
+
+}

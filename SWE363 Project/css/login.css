@@ -4,6 +4,8 @@ main {
     align-items: center;
     height: 100%;
     width: 100%;
+    color: #E8E8E8;
+
 }
 
 .loginContainer {
@@ -12,7 +14,7 @@ main {
     flex-shrink: 0;
     /* display: flex;
     flex-direction: column; */
-    fill: #1B1B1B;
+    /* fill: #1B1B1B; */
     display: flex;
     flex-direction: column;
     justify-content: center;
