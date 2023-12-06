@@ -25,7 +25,7 @@ header img {
 }
 
 header h1,
-header h2 {
+header h2 ,h3 {
     margin: 0;
     flex-shrink: 0;
     color: #E8E8E8;
@@ -55,9 +55,10 @@ header>svg {
 }
 
 .menu {
-    display: flex;
+    display: none;
     flex-direction: column;
     color: #E8E8E8;
+    z-index: 1;
     gap: 10px;
     height: 100%;
     width: 65%;
@@ -73,6 +74,7 @@ header>svg {
 }
 
 .menu.fade-in {
+    display: flex;
     opacity: 0.9;
     transform: translateX(0px);
 }
@@ -115,7 +117,7 @@ section>div {
     gap: 16px;
 }
 
-.card {
+.eventsCard {
     width: 365px;
     height: 269px;
     flex-shrink: 0;
@@ -124,7 +126,7 @@ section>div {
 
 }
 
-.card img {
+.eventsCard img {
     width: 365px;
     height: 208px;
     flex-shrink: 0;
@@ -134,7 +136,7 @@ section>div {
     background: url(./WhatsApp\ Image\ 2023-04-08\ at\ 11.18.42\ PM.jpeg), lightgray 50% / cover no-repeat;
 }
 
-.card .cardTitle {
+.eventsCard .cardTitle {
     /* width: 340px;
     height: 26px; */
     flex-shrink: 0;
@@ -145,7 +147,7 @@ section>div {
 
 }
 
-.card .cardDate {
+.eventsCard .cardDate {
     /* width: 91px;
     height: 13px; */
     flex-shrink: 0;
