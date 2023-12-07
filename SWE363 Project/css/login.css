@@ -1,3 +1,7 @@
+body{
+    height: 90vh;
+}
+
 main {
     display: flex;
     justify-content: center;
@@ -23,4 +27,45 @@ main {
 .login-form {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    background-color: #1B1B1B;
+    padding: 30px 10px;
+    border-radius: 18px;
+}
+
+.login-form h2 {
+    color: #E8E8E8;
+    text-align: center;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.login-form span label {
+    color: #E8E8E8;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.login-form span input {
+    width: 355px;
+    height: 59.667px;
+    flex-shrink: 0;
+    color: #E8E8E8;
+
+    border-radius: 7px;
+    background: #141414;
+    border-radius: 14px;
+}
+
+.login-form button {
+    width: 183px;
+    height: 50.661px;
+    border-radius: 9px;
+    background: #D6CE10;
 }
