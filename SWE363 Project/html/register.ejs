@@ -9,7 +9,7 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./login.css">
-    <title>Login</title>
+    <title>Register</title>
 </head>
 
 <body>
@@ -19,9 +19,16 @@
     <script src="./header.js"></script>
 
     <main>
-        <div class="loginContainer">
-            <form action="/login" method="POST">
-                <h2>Login</h2>
+        <div class="registerContainer">
+            <form action="/register" method="POST">
+                <h2>Register</h2>
+
+                <div>
+                    <label for="name">Name</label> 
+                    <br>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
                 <div>
                     <label for="email">Email</label> 
                     <br>
@@ -34,9 +41,9 @@
                     <input type="password" id="password" name="password" required>
                 </div>
                 
-                <button type="submit">Login</button>
+                <button type="submit">Register</button>
             </form>
-            <a href="/register.html">Register</a>
+            <a href="/login">Login</a>
         </div>
     </main>
 </body>

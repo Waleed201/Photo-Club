@@ -17,7 +17,7 @@ const headerContent = `
         <a href="#">Events</a>
         <a href="#">Announcements</a>
         <a href="#">About Photo Club</a>
-        <a href="#">Join Photo Club</a>
+        <a href="register.html">Join Photo Club</a>
     </div>
 `;
 
