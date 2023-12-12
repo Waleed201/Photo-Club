@@ -1,4 +1,13 @@
 {
     "livePreview.defaultPreviewPath": "/index.html",
-    "liveServer.settings.port": 5501
+    "liveServer.settings.port": 5501,
+    "files.associations": {
+        "*.ejs": "html"
+    },
+    "emmet.includeLanguages": {
+        "ejs": "html",
+    },
+    "html.format.templating": true
+   
 }
+
