@@ -15,6 +15,7 @@ const users = []; // Users array should be defined before calling initializePass
 initializePassport(
   passport, 
   email => users.find(user => user.email === email),
+  id => users.find(user => user.id === id)
 );
 
 const app = express();
@@ -39,11 +40,15 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
+// app.get('/', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, './views/index.ejs'));
+// });
+
 app.get('/', (req, res) => {
-  res.sendFile(path.resolve(__dirname, './SWE363 Project/html/index.html'));
+  res.render('index.ejs');
 });
 
-app.get('/register', (req, res) => {
+app.get('/register', checkNotAuthenticated, (req, res) => { 
   res.render('register.ejs');
 });
 
@@ -62,7 +67,7 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
   }
 });
 
-app.get('/login', (req, res) => {
+app.get('/login', checkNotAuthenticated, (req, res) => {
   res.render('login.ejs');
 });
 
