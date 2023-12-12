@@ -17,7 +17,7 @@ const headerContent = `
         <a href="#">Events</a>
         <a href="#">Announcements</a>
         <a href="#">About Photo Club</a>
-        <a href="#">Join Photo Club</a>
+        <a href="register">Join Photo Club</a>
     </div>
 `;
 
@@ -38,5 +38,5 @@ function toggleMenu() {
 }
 
 document.getElementById("profileIcon").addEventListener("click",function(){
-    window.location.href = 'login.html';
+    window.location.href = 'login';
 })

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<% if (massages.error) { %>
+    <%= massages.error %>
+<% } %>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,9 +16,9 @@
 
 <body>
     <header>
-        
+
     </header>
-<script src="./header.js"></script>
+    <script src="./header.js"></script>
 
     <main>
         <div class="loginContainer">
@@ -36,7 +38,7 @@
                 
                 <button type="submit">Login</button>
             </form>
-            <a href="/register.html">Register</a>
+            <a href="/register">Register</a>
         </div>
     </main>
 </body>
