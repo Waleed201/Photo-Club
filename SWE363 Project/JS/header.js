@@ -1,6 +1,8 @@
 // Create header content
 const headerContent = `
-    <img src="./photo-club-icon.ico" alt="KFUPM Photo club icon">
+    <a href="/">
+        <img src="./photo-club-icon.ico" alt="KFUPM Photo club icon">
+    </a>
     <span>
         <h1>KFUPM</h1>
         <h2>PHOTOCLUB</h2>
