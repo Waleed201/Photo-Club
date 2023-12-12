@@ -47,7 +47,7 @@ app.get('/register', (req, res) => {
   res.render('register.ejs');
 });
 
-app.post('/register', async (req, res) => {
+app.post('/register', checkNotAuthenticated, async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     users.push({
@@ -66,7 +66,7 @@ app.get('/login', (req, res) => {
   res.render('login.ejs');
 });
 
-app.post('/login', passport.authenticate('local', {
+app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/login',
   failureFlash: true
@@ -75,6 +75,26 @@ app.post('/login', passport.authenticate('local', {
 app.all('*', (req, res) => {
   res.status(404).send('Resource not found');
 });
+
+app.delete('/logout', (req, res) => {
+  req.logOut()
+  res.redirect('/login')
+})
+
+function checkAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next()
+  }
+
+  res.redirect('/login')
+}
+
+function checkNotAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return res.redirect('/')
+  }
+  next()
+}
 
 app.listen(3000, () => {
   console.log('Server is listening on port 3000...');
