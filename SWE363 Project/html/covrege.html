@@ -9,9 +9,6 @@
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="covregeCard.css">
-  <link rel="stylesheet" href="eventCard.css">
-
   <style>
     .covregeContaner {
       width: 345px;
@@ -42,7 +39,10 @@
       /* 2 columns */
       grid-gap: 1rem;
       margin-top: 20px;
-      overflow: hidden;
+      overflow-y: auto;
+      /* Enables vertical scrolling */
+      /* Set a maximum height */
+      max-height: 62vh;
       position: relative;
     }
 
@@ -62,6 +62,8 @@
       height: 90px;
       flex-shrink: 0;
       border-radius: 10px;
+      object-fit: cover;
+
     }
 
     .gallery .photo span {
@@ -84,7 +86,6 @@
     .btn {
       width: 35%;
     }
-
   </style>
   <title>Document</title>
 </head>
@@ -103,8 +104,8 @@
       <p>Short course in portrait photography by Mr. Mohammad Shabeb <br>
         Don't miss this chance <br>
         Note: "your attend count with non academic activities"</p>
-      
-        <div class="gallery">
+
+      <div class="gallery" id="gallery">
         <!-- Repeat this div for each photo in the gallery -->
         <div class="photo">
           <img src="9aeedc5ca829c7d666c69768557501e9.jpeg" alt="Ceremony Photo">
@@ -140,17 +141,128 @@
           </span>
         </div>
 
+        <div class="photo">
+          <img src="9aeedc5ca829c7d666c69768557501e9.jpeg" alt="Ceremony Photo">
+          <span>
+            <i class="bi bi-cloud-download"></i>
+            <i class="bi bi-eye"></i>
+          </span>
+        </div>
+
+        <div class="photo">
+          <img src="9aeedc5ca829c7d666c69768557501e9.jpeg" alt="Ceremony Photo">
+          <span>
+            <i class="bi bi-cloud-download"></i>
+            <i class="bi bi-eye"></i>
+          </span>
+        </div>
+
+        <div class="photo">
+          <img src="9aeedc5ca829c7d666c69768557501e9.jpeg" alt="Ceremony Photo">
+          <span>
+            <i class="bi bi-cloud-download"></i>
+            <i class="bi bi-eye"></i>
+          </span>
+        </div>
+
+        <div class="photo">
+          <img src="9aeedc5ca829c7d666c69768557501e9.jpeg" alt="Ceremony Photo">
+          <span>
+            <i class="bi bi-cloud-download"></i>
+            <i class="bi bi-eye"></i>
+          </span>
+        </div>
+
+        <div class="photo">
+          <img src="9aeedc5ca829c7d666c69768557501e9.jpeg" alt="Ceremony Photo">
+          <span>
+            <i class="bi bi-cloud-download"></i>
+            <i class="bi bi-eye"></i>
+          </span>
+        </div>
+
+        <div class="photo">
+          <img src="9aeedc5ca829c7d666c69768557501e9.jpeg" alt="Ceremony Photo">
+          <span>
+            <i class="bi bi-cloud-download"></i>
+            <i class="bi bi-eye"></i>
+          </span>
+        </div>
+
+        <div class="photo">
+          <img src="9aeedc5ca829c7d666c69768557501e9.jpeg" alt="Ceremony Photo">
+          <span>
+            <i class="bi bi-cloud-download"></i>
+            <i class="bi bi-eye"></i>
+          </span>
+        </div>
+
+        <div class="photo">
+          <img src="9aeedc5ca829c7d666c69768557501e9.jpeg" alt="Ceremony Photo">
+          <span>
+            <i class="bi bi-cloud-download"></i>
+            <i class="bi bi-eye"></i>
+          </span>
+        </div>
+
+        <div class="photo">
+          <img src="9aeedc5ca829c7d666c69768557501e9.jpeg" alt="Ceremony Photo">
+          <span>
+            <i class="bi bi-cloud-download"></i>
+            <i class="bi bi-eye"></i>
+          </span>
+        </div>
+
+
 
         <!-- ... -->
       </div>
     </div>
 
-    <div class="button-add-search">
-      <button type="button" class="btn btn-outline-primary">Add</button>
-      <button type="button" class="btn btn-outline-secondary">Search</button>
+    <input type="file" id="fileInput" style="display: none;" />
 
+    <div class="button-add-search">
+      <button type="button" id="addButton" class="btn btn-outline-primary">Add</button>
+      <button type="button" class="btn btn-outline-secondary">Search</button>
     </div>
 
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('addButton').addEventListener('click', function () {
+          document.getElementById('fileInput').click();
+        });
+    
+        document.getElementById('fileInput').addEventListener('change', function (event) {
+          if (event.target.files && event.target.files[0]) {
+            var reader = new FileReader();
+    
+            reader.onload = function (e) {
+              var gallery = document.getElementById('gallery');
+              if (!gallery) {
+                console.error('Gallery element not found!');
+                return;
+              }
+              var newPhotoDiv = document.createElement('div');
+              newPhotoDiv.className = 'photo';
+    
+              var newImage = document.createElement('img');
+              newImage.src = e.target.result;
+              newImage.alt = 'Ceremony Photo';
+    
+              var iconsSpan = document.createElement('span');
+              iconsSpan.innerHTML = '<i class="bi bi-cloud-download"></i><i class="bi bi-eye"></i>';
+    
+              newPhotoDiv.appendChild(newImage);
+              newPhotoDiv.appendChild(iconsSpan);
+              gallery.appendChild(newPhotoDiv);
+            };
+    
+            reader.readAsDataURL(event.target.files[0]);
+          }
+        });
+      });
+    </script>
+    
 
   </main>
 
