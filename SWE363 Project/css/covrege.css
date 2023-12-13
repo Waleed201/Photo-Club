@@ -1,0 +1,76 @@
+.covregeContaner {
+    width: 345px;
+    height: fit-content;
+    min-height: 85vh;
+    flex-shrink: 0;
+    background-color: #1B1B1B;
+    color: aliceblue;
+    margin: auto;
+    margin-top: 13px;
+    padding: 13px;
+  }
+
+  .covregeContaner h3 {
+    font-size: 1.3rem;
+    margin: 10px 3px;
+  }
+
+  .covregeContaner p {
+    opacity: 0.50;
+    font-size: 0.6rem;
+    margin: 5px;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 columns */
+    grid-gap: 1rem;
+    margin-top: 20px;
+    overflow-y: auto;
+    /* Enables vertical scrolling */
+    /* Set a maximum height */
+    max-height: 62vh;
+    position: relative;
+  }
+
+  .gallery .photo {
+    background: white;
+    color: rgb(169, 169, 169);
+
+    width: 100%;
+    height: 124px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: #000;
+  }
+
+  .gallery .photo img {
+    width: 100%;
+    height: 90px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    object-fit: cover;
+
+  }
+
+  .gallery .photo span {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .button-add-search {
+    background-color: #222222;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 5px;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    bottom: 0;
+  }
+
+  .btn {
+    width: 35%;
+  }
