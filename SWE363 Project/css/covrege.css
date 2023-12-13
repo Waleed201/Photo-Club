@@ -2,7 +2,6 @@
     width: 345px;
     height: fit-content;
     min-height: 85vh;
-    flex-shrink: 0;
     background-color: #1B1B1B;
     color: aliceblue;
     margin: auto;
