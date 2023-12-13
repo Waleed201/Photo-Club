@@ -1,38 +1,42 @@
+import boto3
 import face_recognition
-import cv2
-import os
+import io
+from PIL import Image
 
-def find_matching_images(input_image_path, image_directory):
-    # Load the input image and find face encodings
-    input_image = face_recognition.load_image_file(input_image_path)
-    input_face_encodings = face_recognition.face_encodings(input_image)
+# Initialize boto3 client
+s3 = boto3.client('s3')
 
-    if len(input_face_encodings) == 0:
-        return "No faces found in the input image."
+def search_faces(bucket, folder, face_to_find_path):
+    # Load the image of the person to find
+    known_image = face_recognition.load_image_file(face_to_find_path)
+    known_encoding = face_recognition.face_encodings(known_image)[0]
 
-    input_face_encoding = input_face_encodings[0]
+    # List objects within a specified bucket
+    obj_list = s3.list_objects_v2(Bucket=bucket, Prefix=folder)
+    if 'Contents' not in obj_list:
+        return []
 
-    matching_images = []
+    found_faces = []
+    for obj in obj_list['Contents']:
+        # Download image from S3
+        file_stream = io.BytesIO()
+        s3.download_fileobj(Bucket=bucket, Key=obj['Key'], Fileobj=file_stream)
+        file_stream.seek(0)
+        image = face_recognition.load_image_file(file_stream)
 
-    # Loop through images in the directory
-    for image_name in os.listdir(image_directory):
-        # Load each image
-        current_image_path = os.path.join(image_directory, image_name)
-        current_image = face_recognition.load_image_file(current_image_path)
-        current_face_encodings = face_recognition.face_encodings(current_image)
-
-        for face_encoding in current_face_encodings:
-            # Compare faces
-            matches = face_recognition.compare_faces([input_face_encoding], face_encoding)
-            if True in matches:
-                matching_images.append(image_name)
+        # Find all faces in this image
+        face_encodings = face_recognition.face_encodings(image)
+        for face_encoding in face_encodings:
+            matches = face_recognition.compare_faces([known_encoding], face_encoding)
+            if matches[0]:
+                found_faces.append(obj['Key'])
                 break
 
-    return matching_images
+    return found_faces
 
-# Example Usage
-input_image = 'path/to/input/image.jpg'  # Replace with your input image path
-image_folder = 'path/to/image/folder'    # Replace with your image folder path
-
-matched_images = find_matching_images(input_image, image_folder)
-print("Matching Images:", matched_images)
+# Example usage
+bucket_name = 'photo-club-s3'
+folder_name = 'sampleImages'
+face_image_path = 'sampleImages/Me.jpg'
+matching_images = search_faces(bucket_name, folder_name, face_image_path)
+print(matching_images)
