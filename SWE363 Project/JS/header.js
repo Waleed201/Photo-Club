@@ -15,7 +15,7 @@ const headerContent = `
     <div class="menu" id="dropdownMenu">
         <i id="xIcon" class="bi bi-x-circle-fill"></i>
         <i id="profileIcon" class="bi bi-person-circle"></i>
-        <a href="index.html">Home</a>
+        <a href="/">Home</a>
         <a href="#">Events</a>
         <a href="#">Announcements</a>
         <a href="#">About Photo Club</a>
