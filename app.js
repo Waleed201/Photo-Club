@@ -104,9 +104,11 @@ app.get('/covrege', (req, res) => {
   res.render('covrege', { covrg })
 })
 
-app.get('/covreges', (req,res) => {
-  res.render('covreges')
-})
+app.get('/covreges',  (req, res) => {
+  const isAuthenticated = req.isAuthenticated(); // Call it as a function
+  console.log(isAuthenticated); // This will log true or false
+  res.render('covreges', { bool: isAuthenticated });
+});
 
 app.get('/events', (req,res) => {
   res.render('events')
@@ -126,7 +128,7 @@ function checkAuthenticated(req, res, next) {
     return next()
   }
 
-  res.redirect('/login')
+  // res.redirect('/login')
 }
 
 function checkNotAuthenticated(req, res, next) {
