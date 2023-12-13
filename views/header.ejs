@@ -22,4 +22,17 @@
     <a href="register">Join Photo Club</a>
 </div>
 
-<script src="./menu.js"></script>
+<script>
+    document.getElementById('menuIcon').addEventListener('click', toggleMenu);
+document.getElementById('xIcon').addEventListener('click', toggleMenu);
+
+// Function to toggle the menu (you can customize this)
+function toggleMenu() {
+    const menu = document.getElementById('dropdownMenu');
+    menu.classList.toggle('fade-in');
+}
+
+document.getElementById("profileIcon").addEventListener("click",function(){
+    window.location.href = 'login';
+})
+</script>
