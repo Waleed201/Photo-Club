@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="covregeCard.css">
+  <link rel="stylesheet" href="eventCard.css">
+
+  <style>
+    .covregeContaner {
+      width: 345px;
+      height: fit-content;
+      min-height: 85vh;
+      flex-shrink: 0;
+      background-color: #1B1B1B;
+      color: aliceblue;
+      margin: auto;
+      margin-top: 13px;
+      padding: 13px;
+    }
+
+    .covregeContaner h3 {
+      font-size: 1.3rem;
+      margin: 10px 3px;
+    }
+
+    .covregeContaner p {
+      opacity: 0.50;
+      font-size: 0.6rem;
+      margin: 5px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      /* 2 columns */
+      grid-gap: 1rem;
+      margin-top: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .gallery .photo {
+      background: white;
+      color: rgb(169, 169, 169);
+
+      width: 100%;
+      height: 124px;
+      flex-shrink: 0;
+      border-radius: 8px;
+      background: #000;
+    }
+
+    .gallery .photo img {
+      width: 100%;
+      height: 90px;
+      flex-shrink: 0;
+      border-radius: 10px;
+    }
+
+    .gallery .photo span {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .button-add-search {
+      background-color: #222222;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 5px;
+      position: fixed;
+      z-index: 1;
+      width: 100%;
+      bottom: 0;
+    }
+
+    .btn {
+      width: 35%;
+    }
+
+  </style>
+  <title>Document</title>
+</head>
+
+<body>
+  <header>
+  </header>
+  <script src="header.js"></script>
+
+  <main>
+
+
+
+    <div class="covregeContaner">
+      <h3>Ceremony honoring club presidents</h3>
+      <p>Short course in portrait photography by Mr. Mohammad Shabeb <br>
+        Don't miss this chance <br>
+        Note: "your attend count with non academic activities"</p>
+      
+        <div class="gallery">
+        <!-- Repeat this div for each photo in the gallery -->
+        <div class="photo">
+          <img src="9aeedc5ca829c7d666c69768557501e9.jpeg" alt="Ceremony Photo">
+          <span>
+            <i class="bi bi-cloud-download"></i>
+            <i class="bi bi-eye"></i>
+          </span>
+        </div>
+
+        <div class="photo">
+          <img src="9aeedc5ca829c7d666c69768557501e9.jpeg" alt="Ceremony Photo">
+          <span>
+            <i class="bi bi-cloud-download"></i>
+            <i class="bi bi-eye"></i>
+          </span>
+        </div>
+
+
+        <div class="photo">
+          <img src="9aeedc5ca829c7d666c69768557501e9.jpeg" alt="Ceremony Photo">
+          <span>
+            <i class="bi bi-cloud-download"></i>
+            <i class="bi bi-eye"></i>
+          </span>
+        </div>
+
+
+        <div class="photo">
+          <img src="9aeedc5ca829c7d666c69768557501e9.jpeg" alt="Ceremony Photo">
+          <span>
+            <i class="bi bi-cloud-download"></i>
+            <i class="bi bi-eye"></i>
+          </span>
+        </div>
+
+
+        <!-- ... -->
+      </div>
+    </div>
+
+    <div class="button-add-search">
+      <button type="button" class="btn btn-outline-primary">Add</button>
+      <button type="button" class="btn btn-outline-secondary">Search</button>
+
+    </div>
+
+
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+</body>
+
+</html>
