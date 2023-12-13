@@ -44,16 +44,22 @@ main {
     line-height: normal;
 }
 
-.login-form span label {
+.login-form div {
+    width: 100%;
+    padding: 0px 13px;
+}
+
+.login-form div label {
     color: #E8E8E8;
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    padding: 2px 5px;
 }
 
-.login-form span input {
-    width: 355px;
+.login-form div input {
+    width: 100%;
     height: 59.667px;
     flex-shrink: 0;
     color: #E8E8E8;
