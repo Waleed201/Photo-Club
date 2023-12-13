@@ -1,4 +1,4 @@
 cvCard = document.querySelector(".coverageCard");
 cvCard.addEventListener('click', function() {
-    window.location.href = "covrege"
+    window.location.href = "covrege.ejs"
 })
