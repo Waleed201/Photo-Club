@@ -1,11 +1,14 @@
 .eventCard {
     width: 365px;
-    height: 116px;
+    height: fit-content;
     flex-shrink: 0;
     background-color: #222222;
     color: #E8E8E8;
     border-radius: 18px;
     padding: 15px;
+    border: 1px solid black;
+    box-shadow: 3px 5px 12px black;
+
 }
 
 .eventCard .titlePar {
@@ -26,16 +29,11 @@
 }
 
 .eventCard .registerButton{
-    display: flex;
-    justify-content: center;
-    align-items:center;
     width: 70px;
-    height: 16px;
-    font-size: 13px;
-    border-radius: 9px;
-    background: #f6ec04;
-    color: #222222;
-
+    height: 19px;
+    font-size: 11px;
+    text-align: center;
+    padding: 0;
 }
 
 
