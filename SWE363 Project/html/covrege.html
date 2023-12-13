@@ -39,78 +39,24 @@
           </span>
         </div>
 
-        <div class="photo">
-          <img src="9aeedc5ca829c7d666c69768557501e9.jpeg" alt="Ceremony Photo">
-          <span>
-            <i class="bi bi-cloud-download"></i>
-            <i class="bi bi-eye"></i>
-          </span>
-        </div>
-
-        <div class="photo">
-          <img src="9aeedc5ca829c7d666c69768557501e9.jpeg" alt="Ceremony Photo">
-          <span>
-            <i class="bi bi-cloud-download"></i>
-            <i class="bi bi-eye"></i>
-          </span>
-        </div>
-
-
-
-
-
 
         <!-- ... -->
       </div>
     </div>
 
-    <input type="file" id="fileInput" style="display: none;" />
-
+    <input type="file" id="fileInput" multiple style="display: none;">
+    <input type="file" id="folderInput" webkitdirectory directory multiple style="display: none;">
+    
     <div class="button-add-search">
       <button type="button" id="addButton" class="btn btn-outline-primary">Add</button>
       <button type="button" class="btn btn-outline-secondary">Search</button>
     </div>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        document.getElementById('addButton').addEventListener('click', function () {
-          document.getElementById('fileInput').click();
-        });
-    
-        document.getElementById('fileInput').addEventListener('change', function (event) {
-          if (event.target.files && event.target.files[0]) {
-            var reader = new FileReader();
-    
-            reader.onload = function (e) {
-              var gallery = document.getElementById('gallery');
-              if (!gallery) {
-                console.error('Gallery element not found!');
-                return;
-              }
-              var newPhotoDiv = document.createElement('div');
-              newPhotoDiv.className = 'photo';
-    
-              var newImage = document.createElement('img');
-              newImage.src = e.target.result;
-              newImage.alt = 'Ceremony Photo';
-    
-              var iconsSpan = document.createElement('span');
-              iconsSpan.innerHTML = '<i class="bi bi-cloud-download"></i><i class="bi bi-eye"></i>';
-    
-              newPhotoDiv.appendChild(newImage);
-              newPhotoDiv.appendChild(iconsSpan);
-              gallery.appendChild(newPhotoDiv);
-            };
-    
-            reader.readAsDataURL(event.target.files[0]);
-          }
-        });
-      });
-    </script>
     
 
   </main>
 
+
+  <script src="covrege.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.9.2/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

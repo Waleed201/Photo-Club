@@ -2,11 +2,51 @@
     font-family: 'Inter';
     src: url('fonts/Inter-Thin.ttf') format('truetype');
     font-weight: 100;
-}
-
+  }
+  
+  @font-face {
+    font-family: 'Inter';
+    src: url('fonts/Inter-ExtraLight.ttf') format('truetype');
+    font-weight: 200;
+  }
+  
+  @font-face {
+    font-family: 'Inter';
+    src: url('fonts/Inter-Light.ttf') format('truetype');
+    font-weight: 300;
+  }
+  
+  @font-face {
+    font-family: 'Inter';
+    src: url('fonts/Inter-Regular.ttf') format('truetype');
+    font-weight: 400;
+  }
+  
+  @font-face {
+    font-family: 'Inter';
+    src: url('fonts/Inter-Medium.ttf') format('truetype');
+    font-weight: 500;
+  }
+  
+  @font-face {
+    font-family: 'Inter';
+    src: url('fonts/Inter-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+  }
+  
+  @font-face {
+    font-family: 'Inter';
+    src: url('fonts/Inter-Bold.ttf') format('truetype');
+    font-weight: 700;
+  }
+  
+  /* Add other font weights and styles as needed */
+  
 body {
     background-color: #141414;
-    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400; /* This will use Inter-Regular.ttf */
+      margin: 0;
     overflow-x: hidden;
 }
 
@@ -67,7 +107,7 @@ header>svg {
     gap: 10px;
     height: 100%;
     width: 65%;
-    position: absolute;
+    position: fixed;
     top: 0px;
     right: 0px;
     background-color: #282828;
