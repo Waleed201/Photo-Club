@@ -9,8 +9,21 @@ main {
     height: 100%;
     width: 100%;
     color: #E8E8E8;
-
 }
+
+.errorMessage {
+    height: fit-content;
+    width: fit-content;
+    background-color: #c0242494;
+    opacity: 0.8;
+    position: absolute;
+    top: 5%;
+    left: calc(50%-fit-content);
+    padding: 10px;
+    border-color: #E8E8E8;
+    border-radius:5px;
+}
+
 
 .loginContainer {
     width: 365px;
