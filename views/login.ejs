@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<% if (messages.error) { %>
-    <%= messages.error %>
-<% } %>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,6 +17,12 @@
     </header>
 
     <main>
+        <% if (messages.error) { %>
+            <div id="error-message" class="errorMessage"><%= messages.error %></div> 
+        <% } %>
+
+        
+        
         <div class="loginContainer">
             <form action="/login" method="POST" class="login-form">
                 <h2>Login</h2>
@@ -40,6 +43,8 @@
             <a href="/register">Register</a>
         </div>
     </main>
+
+    <script src="login.js"></script>
 </body>
 
 </html>
