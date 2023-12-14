@@ -150,9 +150,10 @@ app.get('/covrege', (req, res) => {
 })
 
 app.get('/covreges',  (req, res) => {
-  const isAuthenticated = req.isAuthenticated(); // Call it as a function
-  console.log(isAuthenticated); // This will log true or false
-  res.render('covreges', { bool: isAuthenticated });
+  // const isAuthenticated = ; // Call it as a function
+  console.log(req.isAuthenticated());
+  console.log(req.isAuthenticated()) // This will log true or false
+  res.render('covreges', { bool: true });
   
 });
 
@@ -178,10 +179,17 @@ function checkNotAuthenticated(req, res, next) {
   next()
 }
 
-app.delete('/logout', (req, res) => {
-  req.logOut()
-  res.redirect('/login')
-})
+app.get('/logout', (req, res) => {
+  // Call the logout method on the req object
+  req.logout((err) => {
+    if (err) {
+      // Handle the error, e.g., by redirecting to an error page
+      return res.redirect('/error');
+    }
+    // Redirect the user to a specific page after successful logout
+    res.redirect('/login');
+  });
+});
 
 
 app.listen(3000, () => {
