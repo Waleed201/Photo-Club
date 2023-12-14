@@ -16,6 +16,7 @@ def upload():
 
     # Call your face recognition function here
     # For example, if your function is named 'search_faces'
+    
     results = FR.search_faces()
 
     # Return the results or render another template with the results
