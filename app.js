@@ -28,6 +28,8 @@ app.use(express.static('./SWE363 Project/css'));
 app.use(express.static('./SWE363 Project/fonts'));
 app.use(express.static('./SWE363 Project/js')); // Changed 'JS' to 'js' for consistency
 app.use(express.static('./SWE363 Project/images'));
+app.use(express.static('./SWE363 Project'));
+
 
 // Commented out the HTML directory to prevent serving static HTML files
 // app.use(express.static('./SWE363 Project/html'));
@@ -52,6 +54,11 @@ app.use(methodOverride('_method'));
 app.get('/', (req, res) => {
   res.render('index');
 });
+
+app.get('/index1', (req, res) => {
+  res.render('index1');
+});
+
 
 app.get('/register', checkNotAuthenticated, (req, res) => {
   res.render('register');

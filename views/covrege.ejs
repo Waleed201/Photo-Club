@@ -12,7 +12,9 @@
   <link rel="stylesheet" href="covrege.css">
   <link rel="icon" href="./photo-club-icon.ico" type="image/x-icon">
 
-  <title><%= covrg.ceremonyTitle %></title>
+  <title>
+    <%= covrg.ceremonyTitle %>
+  </title>
 </head>
 
 <body>
@@ -22,8 +24,12 @@
 
   <main>
     <div class="covregeContaner">
-      <h3><%= covrg.ceremonyTitle %></h3>
-      <p><%= covrg.details %></p>
+      <h3>
+        <%= covrg.ceremonyTitle %>
+      </h3>
+      <p>
+        <%= covrg.details %>
+      </p>
 
       <div class="gallery" id="gallery">
         <% covrg.photos.forEach(function(photo) { %>
@@ -34,63 +40,64 @@
               <i class="bi bi-eye"></i>
             </span>
           </div>
-        <% }); %>
+          <% }); %>
       </div>
     </div>
 
     <input type="file" id="fileInput" multiple style="display: none;">
     <input type="file" id="folderInput" webkitdirectory directory multiple style="display: none;">
-    
+
     <div class="button-add-search">
       <button type="button" id="addButton" class="btn btn-outline-primary">Add</button>
       <button type="button" class="btn btn-outline-secondary">Search</button>
     </div>
-    
+
   </main>
 
-  <script>document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('addButton').addEventListener('click', function () {
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      document.getElementById('addButton').addEventListener('click', function () {
         document.getElementById('fileInput').click();
-    });
+      });
 
-    document.getElementById('fileInput').addEventListener('change', function (event) {
+      document.getElementById('fileInput').addEventListener('change', function (event) {
         var files = event.target.files;
         if (files) {
-            var gallery = document.getElementById('gallery');
-            if (!gallery) {
-                console.error('Gallery element not found!');
-                return;
+          var gallery = document.getElementById('gallery');
+          if (!gallery) {
+            console.error('Gallery element not found!');
+            return;
+          }
+
+          for (var i = 0; i < files.s; i++) {
+            if (files[i].type.match('image.*')) { // Check if the file is an image
+              var reader = new FileReader();
+
+              reader.onload = (function (file) {
+                return function (e) {
+                  var newPhotoDiv = document.createElement('div');
+                  newPhotoDiv.className = 'photo';
+
+                  var newImage = document.createElement('img');
+                  newImage.src = e.target.result;
+                  newImage.alt = file.name; // Use the file's name as the alt text
+
+                  var iconsSpan = document.createElement('span');
+                  iconsSpan.innerHTML = '<i class="bi bi-cloud-download"></i><i class="bi bi-eye"></i>';
+
+                  newPhotoDiv.appendChild(newImage);
+                  newPhotoDiv.appendChild(iconsSpan);
+                  gallery.appendChild(newPhotoDiv);
+                };
+              })(files[i]);
+
+              reader.readAsDataURL(files[i]);
             }
-
-            for (var i = 0; i < files.length; i++) {
-                if (files[i].type.match('image.*')) { // Check if the file is an image
-                    var reader = new FileReader();
-
-                    reader.onload = (function (file) {
-                        return function (e) {
-                            var newPhotoDiv = document.createElement('div');
-                            newPhotoDiv.className = 'photo';
-
-                            var newImage = document.createElement('img');
-                            newImage.src = e.target.result;
-                            newImage.alt = file.name; // Use the file's name as the alt text
-
-                            var iconsSpan = document.createElement('span');
-                            iconsSpan.innerHTML = '<i class="bi bi-cloud-download"></i><i class="bi bi-eye"></i>';
-
-                            newPhotoDiv.appendChild(newImage);
-                            newPhotoDiv.appendChild(iconsSpan);
-                            gallery.appendChild(newPhotoDiv);
-                        };
-                    })(files[i]);
-
-                    reader.readAsDataURL(files[i]);
-                }
-            }
+          }
         }
+      });
     });
-});
-</script>
+  </script>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.9.2/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
