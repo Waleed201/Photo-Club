@@ -32,12 +32,12 @@
       </p>
 
       <div class="gallery" id="gallery">
-        <% covrg.photos.forEach(function(photo) { %>
+        <% files.forEach(function(file) { %>
           <div class="photo">
-            <img src="<%= photo %>" alt="---">
+            <img src="<%= file.url %>" alt="---">
             <span>
-              <i class="bi bi-cloud-download"></i>
-              <i class="bi bi-eye"></i>
+              <i class="bi bi-cloud-download downloadIcon"></i>
+              <i class="bi bi-eye eyeIcon"></i>
             </span>
           </div>
           <% }); %>
@@ -55,48 +55,50 @@
   </main>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      document.getElementById('addButton').addEventListener('click', function () {
-        document.getElementById('fileInput').click();
+    
+    dow = document.getElementsByClassName('downloadIcon');
+    vew = document.getElementsByClassName('eyeIcon');
+    
+    for (let i = 0; i < dow.length; i++) {
+      dow[i].addEventListener('click', function () {
+        var url = this.parentElement.parentElement.children[0].src;
+        var link = document.createElement('a');
+        link.href = url;
+        link.download = url.substr(url.lastIndexOf('/') + 1);
+        link.click();
       });
+    }
 
-      document.getElementById('fileInput').addEventListener('change', function (event) {
-        var files = event.target.files;
-        if (files) {
-          var gallery = document.getElementById('gallery');
-          if (!gallery) {
-            console.error('Gallery element not found!');
-            return;
-          }
 
-          for (var i = 0; i < files.s; i++) {
-            if (files[i].type.match('image.*')) { // Check if the file is an image
-              var reader = new FileReader();
-
-              reader.onload = (function (file) {
-                return function (e) {
-                  var newPhotoDiv = document.createElement('div');
-                  newPhotoDiv.className = 'photo';
-
-                  var newImage = document.createElement('img');
-                  newImage.src = e.target.result;
-                  newImage.alt = file.name; // Use the file's name as the alt text
-
-                  var iconsSpan = document.createElement('span');
-                  iconsSpan.innerHTML = '<i class="bi bi-cloud-download"></i><i class="bi bi-eye"></i>';
-
-                  newPhotoDiv.appendChild(newImage);
-                  newPhotoDiv.appendChild(iconsSpan);
-                  gallery.appendChild(newPhotoDiv);
-                };
-              })(files[i]);
-
-              reader.readAsDataURL(files[i]);
-            }
-          }
-        }
+    function attachDownloadHandlers() {
+    var downloadIcons = document.getElementsByClassName('downloadIcon');
+    for (var i = 0; i < downloadIcons.length; i++) {
+      downloadIcons[i].addEventListener('click', function () {
+        var url = this.parentElement.parentElement.children[0].src;
+        var link = document.createElement('a');
+        link.href = url;
+        link.download = url.substr(url.lastIndexOf('/') + 1);
+        link.click();
       });
-    });
+    }
+  }
+    
+    function attachViewHandlers() {
+      var viewIcons = document.getElementsByClassName('eyeIcon');
+      
+    }
+    
+    attachDownloadHandlers();
+    attachViewHandlers();
+  
+  
+  
+  
+  
+  
+  
+  
+  
   </script>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.9.2/dist/umd/popper.min.js"></script>
