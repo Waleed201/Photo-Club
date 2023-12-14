@@ -13,6 +13,26 @@ const initializePassport = require('./passport-config');
 
 const users = []; // Users array should be defined before calling initializePassport
 
+async function eee() {
+  const a = await bcrypt.hash("admin", 10);
+  return a;
+}
+ 
+(async () => {
+  const hashedPassword = await eee();
+
+  users.push({
+    id: Date.now().toString(),
+    name: "admin",
+    email: "admin@admin",
+    password: hashedPassword,
+    role: 'admin'
+  });
+
+  // Rest of your code...
+})();
+
+
 initializePassport(
   passport,
   email => users.find(user => user.email === email),
@@ -57,20 +77,39 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
   res.render('register');
 });
 
+const getUserByEmail = (email) => {
+  return users.find((user) => user.email === email);
+};
+
 app.post('/register', checkNotAuthenticated, async (req, res) => {
   try {
+    const email = req.body.email;
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
+    // Check if the user already exists
+    const user = getUserByEmail(email);
+
+    if (user) {
+      // User with this email already exists
+      req.flash('error', 'Email already exists');
+      return res.status(400).render('register', { messages: req.flash() });
+      res.redirect('/login'); 
+    }
+
+    // If user is null, add the new user
     users.push({
       id: Date.now().toString(),
       name: req.body.name,
-      email: req.body.email,
+      email: email,
       password: hashedPassword,
-      role: req.body.role
+      role: 'user'
     });
-    res.redirect('/login');
-  } catch {
+    res.redirect('/login'); // Redirect to login page after successful registration
+  } catch (error) {
+    console.error(error);
     res.redirect('/register');
   }
+  console.log(users);
 });
 
 app.get('/login', checkNotAuthenticated, (req, res) => {
