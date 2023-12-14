@@ -11,6 +11,8 @@ const session = require('express-session');
 const methodOverride = require('method-override');
 const initializePassport = require('./passport-config');
 
+
+
 const users = []; // Users array should be defined before calling initializePassport
 
 async function eee() {
@@ -48,6 +50,8 @@ app.use(express.static('./SWE363 Project/css'));
 app.use(express.static('./SWE363 Project/fonts'));
 app.use(express.static('./SWE363 Project/js')); // Changed 'JS' to 'js' for consistency
 app.use(express.static('./SWE363 Project/images'));
+app.use(methodOverride('_method'));
+
 
 // Commented out the HTML directory to prevent serving static HTML files
 // app.use(express.static('./SWE363 Project/html'));
@@ -62,7 +66,6 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(methodOverride('_method'));
 
 // Routes
 // app.get('/', (req, res) => {
@@ -176,10 +179,10 @@ function checkNotAuthenticated(req, res, next) {
 }
 
 app.delete('/logout', (req, res) => {
-
   req.logOut()
   res.redirect('/login')
 })
+
 
 app.listen(3000, () => {
   console.log('Server is listening on port http://localhost:3000 ...');
