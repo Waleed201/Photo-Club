@@ -11,7 +11,29 @@ const session = require('express-session');
 const methodOverride = require('method-override');
 const initializePassport = require('./passport-config');
 
+
+
 const users = []; // Users array should be defined before calling initializePassport
+
+async function eee() {
+  const a = await bcrypt.hash("admin", 10);
+  return a;
+}
+ 
+(async () => {
+  const hashedPassword = await eee();
+
+  users.push({
+    id: Date.now().toString(),
+    name: "admin",
+    email: "admin@admin",
+    password: hashedPassword,
+    role: 'admin'
+  });
+
+  // Rest of your code...
+})();
+
 
 initializePassport(
   passport,
@@ -29,6 +51,7 @@ app.use(express.static('./SWE363 Project/fonts'));
 app.use(express.static('./SWE363 Project/js')); // Changed 'JS' to 'js' for consistency
 app.use(express.static('./SWE363 Project/images'));
 app.use(express.static('./SWE363 Project'));
+app.use(methodOverride('_method'));
 
 
 // Commented out the HTML directory to prevent serving static HTML files
@@ -44,7 +67,6 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(methodOverride('_method'));
 
 // Routes
 // app.get('/', (req, res) => {
@@ -64,20 +86,39 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
   res.render('register');
 });
 
+const getUserByEmail = (email) => {
+  return users.find((user) => user.email === email);
+};
+
 app.post('/register', checkNotAuthenticated, async (req, res) => {
   try {
+    const email = req.body.email;
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
+    // Check if the user already exists
+    const user = getUserByEmail(email);
+
+    if (user) {
+      // User with this email already exists
+      req.flash('error', 'Email already exists');
+      return res.status(400).render('register', { messages: req.flash() });
+      res.redirect('/login'); 
+    }
+
+    // If user is null, add the new user
     users.push({
       id: Date.now().toString(),
       name: req.body.name,
-      email: req.body.email,
+      email: email,
       password: hashedPassword,
-      role: req.body.role
+      role: 'user'
     });
-    res.redirect('/login');
-  } catch {
+    res.redirect('/login'); // Redirect to login page after successful registration
+  } catch (error) {
+    console.error(error);
     res.redirect('/register');
   }
+  console.log(users);
 });
 
 app.get('/login', checkNotAuthenticated, (req, res) => {
@@ -115,9 +156,10 @@ app.get('/covrege', (req, res) => {
 })
 
 app.get('/covreges',  (req, res) => {
-  const isAuthenticated = req.isAuthenticated(); // Call it as a function
-  console.log(isAuthenticated); // This will log true or false
-  res.render('covreges', { bool: isAuthenticated });
+  // const isAuthenticated = ; // Call it as a function
+  console.log(req.isAuthenticated());
+  console.log(req.isAuthenticated()) // This will log true or false
+  res.render('covreges', { bool: true });
   
 });
 
@@ -143,11 +185,18 @@ function checkNotAuthenticated(req, res, next) {
   next()
 }
 
-app.delete('/logout', (req, res) => {
+app.get('/logout', (req, res) => {
+  // Call the logout method on the req object
+  req.logout((err) => {
+    if (err) {
+      // Handle the error, e.g., by redirecting to an error page
+      return res.redirect('/error');
+    }
+    // Redirect the user to a specific page after successful logout
+    res.redirect('/login');
+  });
+});
 
-  req.logOut()
-  res.redirect('/login')
-})
 
 app.listen(3000, () => {
   console.log('Server is listening on port http://localhost:3000 ...');
