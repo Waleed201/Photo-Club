@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<% if (messages.error) { %>
-    <%= messages.error %>
-<% } %>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,16 +8,23 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./login.css">
+    <link rel="icon" href="./photo-club-icon.ico" type="image/x-icon">
+
     <title>Login</title>
 </head>
 
 <body>
     <header>
-
+        <%- include('header') %>
     </header>
-    <script src="./header.js"></script>
 
     <main>
+        <% if (messages.error) { %>
+            <div id="error-message" class="errorMessage"><%= messages.error %></div> 
+        <% } %>
+
+        
+        
         <div class="loginContainer">
             <form action="/login" method="POST" class="login-form">
                 <h2>Login</h2>
@@ -41,6 +45,19 @@
             <a href="/register">Register</a>
         </div>
     </main>
+
+    <script>            // Wait for the DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if the element exists
+            var errorMessage = document.getElementById('error-message');
+            if (errorMessage) {
+                // Set a timeout to hide the message after 3 seconds (3000 milliseconds)
+                setTimeout(function() {
+                    errorMessage.style.display = 'none';
+                }, 3000);
+            }
+        });
+</script>
 </body>
 
 </html>

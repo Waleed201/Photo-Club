@@ -1,8 +1,12 @@
-<img src="./photo-club-icon.ico" alt="KFUPM Photo club icon">
+<a href="/">
+    <img src="./photo-club-icon.ico" alt="KFUPM Photo club icon">
+</a>
+<a href="/">
 <span>
     <h1>KFUPM</h1>
     <h2>PHOTOCLUB</h2>
 </span>
+</a>
 <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" width="46" height="38" viewBox="0 0 46 38" fill="none">
     <rect x="6" y="6" width="35" height="6" rx="3" fill="#E8E8E8" />
     <rect x="6" y="16" width="35" height="6" rx="3" fill="#E8E8E8" />
@@ -11,11 +15,24 @@
 <div class="menu" id="dropdownMenu">
     <i id="xIcon" class="bi bi-x-circle-fill"></i>
     <i id="profileIcon" class="bi bi-person-circle"></i>
-    <a href="#">Home</a>
-    <a href="#">Events</a>
-    <a href="#">Announcements</a>
+    <a href="/">Home</a>
+    <a href="covreges">covreges</a>
+    <a href="events">Events</a>
     <a href="#">About Photo Club</a>
-    <a href="#">Join Photo Club</a>
+    <a href="register">Join Photo Club</a>
 </div>
 
-<script src="./menu.js"></script>
+<script>
+    document.getElementById('menuIcon').addEventListener('click', toggleMenu);
+document.getElementById('xIcon').addEventListener('click', toggleMenu);
+
+// Function to toggle the menu (you can customize this)
+function toggleMenu() {
+    const menu = document.getElementById('dropdownMenu');
+    menu.classList.toggle('fade-in');
+}
+
+document.getElementById("profileIcon").addEventListener("click",function(){
+    window.location.href = 'login';
+})
+</script>

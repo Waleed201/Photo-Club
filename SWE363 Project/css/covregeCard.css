@@ -1,14 +1,32 @@
+.cardsContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.cardsContainer > div {
+    padding: 10px;
+    background-color: #1e1e1e;
+    border-radius: 15px;
+}
+
+.cardsContainer h1 {
+    color: aliceblue;
+}
+
+
 .coverageCard {
     width: 365px;
     height: 269px;
     flex-shrink: 0;
     background-color: #222222;
     border-radius: 18px;
-
+    border: 1px solid black;
+    box-shadow: 4px 6px 15px  black;
 }
 
 .coverageCard img {
-    width: 365px;
+    width: 100%;
     height: 208px;
     flex-shrink: 0;
     object-fit: cover;
@@ -31,11 +49,9 @@
 .coverageCard .cardDate {
     /* width: 91px;
     height: 13px; */
-    flex-shrink: 0;
-
     color: #E8E8E8;
     font-family: 'Inter', sans-serif;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 400;
     line-height: normal;
     margin: 5px 20px;
