@@ -108,6 +108,7 @@ app.get('/covreges',  (req, res) => {
   const isAuthenticated = req.isAuthenticated(); // Call it as a function
   console.log(isAuthenticated); // This will log true or false
   res.render('covreges', { bool: isAuthenticated });
+  
 });
 
 app.get('/events', (req,res) => {
