@@ -10,6 +10,7 @@ const flash = require('express-flash');
 const session = require('express-session');
 const methodOverride = require('method-override');
 const initializePassport = require('./passport-config');
+const { createS3Instance, BUCKETNAME } = require('./aws-s3'); // Import the functions and objects from aws-s3.js
 
 
 
@@ -50,8 +51,9 @@ app.use(express.static('./SWE363 Project/css'));
 app.use(express.static('./SWE363 Project/fonts'));
 app.use(express.static('./SWE363 Project/js')); // Changed 'JS' to 'js' for consistency
 app.use(express.static('./SWE363 Project/images'));
-app.use(express.static('./SWE363 Project'));
+app.use(express.static('./aws-s3')); // Added this line to serve static files from the 'aws-s3' directory
 app.use(methodOverride('_method'));
+
 
 
 // Commented out the HTML directory to prevent serving static HTML files
@@ -156,9 +158,41 @@ function base64_encode(file) {
 
 // Adding base64 encoded images to the object
 
+// app.get('/covrege', (req, res) => {
+//   const s3 = new AWS.S3(); // Create a new S3 instance
+//     const listParams = { Bucket: BUCKETNAME }; // Define parameters for listing objects in S3 bucket
+//     s3.listObjectsV2(listParams, (err, data) => { // List objects in the specified bucket
+//         if (err) {
+//             console.log(err); // Log any errors to the console
+//             res.status(500).send("Internal Server Error"); // Send a 500 error response on failure
+//         } else {
+//             // Map S3 file data to a more user-friendly format
+//             const files = data.Contents.map(file => ({
+//                 name: file.Key, // File name
+//                 url: `https://${BUCKETNAME}.s3.amazonaws.com/${file.Key}` // File URL
+//             }));
+//   res.render('covrege', { files , covrg })
+//         }
+//     }
+//     )
+// });
+
 app.get('/covrege', (req, res) => {
-  res.render('covrege', { covrg })
-})
+  const s3 = createS3Instance(); // Use the createS3Instance function from aws-s3.js
+  const listParams = { Bucket: BUCKETNAME };
+  s3.listObjectsV2(listParams, (err, data) => {
+      if (err) {
+          console.log(err);
+          res.status(500).send("Internal Server Error");
+      } else {
+          const files = data.Contents.map(file => ({
+              name: file.Key,
+              url: `https://${BUCKETNAME}.s3.amazonaws.com/${file.Key}`
+          }));
+          res.render('covrege', { files , covrg });
+      }
+  });
+});
 
 app.get('/covreges',  (req, res) => {
   // const isAuthenticated = ; // Call it as a function

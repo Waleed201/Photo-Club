@@ -32,12 +32,12 @@
       </p>
 
       <div class="gallery" id="gallery">
-        <% covrg.photos.forEach(function(photo) { %>
+        <% files.forEach(function(file) { %>
           <div class="photo">
-            <img src="<%= photo %>" alt="---">
+            <img src="<%= file.url %>" alt="---">
             <span>
-              <i class="bi bi-cloud-download"></i>
-              <i class="bi bi-eye"></i>
+              <i class="bi bi-cloud-download downloadIcon"></i>
+              <i class="bi bi-eye eyeIcon"></i>
             </span>
           </div>
           <% }); %>
@@ -55,8 +55,51 @@
   </main>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      document.getElementById('addButton').addEventListener('click', function () {
+    
+    dow = document.getElementsByClassName('downloadIcon');
+    vew = document.getElementsByClassName('eyeIcon');
+    
+    for (let i = 0; i < dow.length; i++) {
+      dow[i].addEventListener('click', function () {
+        var url = this.parentElement.parentElement.children[0].src;
+        var link = document.createElement('a');
+        link.href = url;
+        link.download = url.substr(url.lastIndexOf('/') + 1);
+        link.click();
+      });
+    }
+
+
+    function attachDownloadHandlers() {
+    var downloadIcons = document.getElementsByClassName('downloadIcon');
+    for (var i = 0; i < downloadIcons.length; i++) {
+      downloadIcons[i].addEventListener('click', function () {
+        var url = this.parentElement.parentElement.children[0].src;
+        var link = document.createElement('a');
+        link.href = url;
+        link.download = url.substr(url.lastIndexOf('/') + 1);
+        link.click();
+      });
+    }
+  }
+    
+    function attachViewHandlers() {
+      var viewIcons = document.getElementsByClassName('eyeIcon');
+      
+    }
+    
+    attachDownloadHandlers();
+    attachViewHandlers();
+  
+  
+  
+  
+  
+  
+  
+  
+  document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('addButton').addEventListener('click', function () {
         document.getElementById('fileInput').click();
       });
 
