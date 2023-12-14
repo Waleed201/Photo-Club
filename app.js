@@ -125,11 +125,16 @@ app.get('/login', checkNotAuthenticated, (req, res) => {
   res.render('login');
 });
 
-app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
+app.post('/login', checkNotAuthenticated, (req,res) => {
+    
+  email = req.body.email
+  user = getUserByEmail(email)
+  console.log("oooooo     "+user.role)
+},passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/login',
-  failureFlash: true
-}));
+  failureFlash: true}),
+  );
 
 const fs = require('fs');
 
