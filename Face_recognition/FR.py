@@ -6,7 +6,7 @@ from PIL import Image
 # Initialize boto3 client for S3
 s3 = boto3.client('s3')
 
-def search_faces(bucket_name, folder_name, face_to_find_key):
+def search_faces(bucket_name = 'photo-club-s3', folder_name='sampleImages', face_to_find_key ='sampleImages/AMin2.jpg'):
     # Download the reference image from S3
     file_stream = io.BytesIO()
     s3.download_fileobj(Bucket=bucket_name, Key=face_to_find_key, Fileobj=file_stream)
