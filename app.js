@@ -8,8 +8,9 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 const flash = require('express-flash');
 const session = require('express-session');
-
+const methodOverride = require('method-override');
 const initializePassport = require('./passport-config');
+
 const users = []; // Users array should be defined before calling initializePassport
 
 initializePassport(
@@ -41,6 +42,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(methodOverride('_method'));
 
 // Routes
 // app.get('/', (req, res) => {
@@ -62,7 +64,8 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
       id: Date.now().toString(),
       name: req.body.name,
       email: req.body.email,
-      password: hashedPassword
+      password: hashedPassword,
+      role: req.body.role
     });
     res.redirect('/login');
   } catch {
@@ -119,17 +122,11 @@ app.all('*', (req, res) => {
   res.status(404).send('Resource not found');
 });
 
-app.delete('/logout', (req, res) => {
-  req.logOut()
-  res.redirect('/login')
-})
-
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next()
   }
-
-  // res.redirect('/login')
+  res.redirect('/login')
 }
 
 function checkNotAuthenticated(req, res, next) {
@@ -138,6 +135,12 @@ function checkNotAuthenticated(req, res, next) {
   }
   next()
 }
+
+app.delete('/logout', (req, res) => {
+
+  req.logOut()
+  res.redirect('/login')
+})
 
 app.listen(3000, () => {
   console.log('Server is listening on port http://localhost:3000 ...');
