@@ -15,30 +15,65 @@ const initializePassport = require('./passport-config');
 
 const users = []; // Users array should be defined before calling initializePassport
 
-async function eee() {
-  const a = await bcrypt.hash("admin", 10);
+async function eee(str) {
+  const a = await bcrypt.hash(str, 10);
   return a;
 }
  
 (async () => {
-  const hashedPassword = await eee();
+  var hashedPassword = await eee("admin");
 
   users.push({
     id: Date.now().toString(),
     name: "admin",
-    email: "admin@admin",
+    email: "admin@a",
     password: hashedPassword,
     role: 'admin'
+  })
+  
+   hashedPassword = await eee("member");
+  users.push({
+    id: Date.now().toString(),
+    name: "admin",
+    email: "member@a",
+    password: hashedPassword,
+    role: 'member'
+  })
+  
+  hashedPassword = await eee("club");
+  users.push({
+    id: Date.now().toString(),
+    name: "admin",
+    email: "club@a",
+    password: hashedPassword,
+    role: 'club'
+  })
+  
+  hashedPassword = await eee("user");
+  users.push({
+    id: Date.now().toString(),
+    name: "admin",
+    email: "user@admin",
+    password: hashedPassword,
+    role: 'user'
   });
 
   // Rest of your code...
 })();
 
+const getUserByEmail = (email) => {
+  return users.find((user) => user.email === email);
+};
+
+const getUserById = (id) => {
+  return users.find(user => user.id === id);
+};
+
 
 initializePassport(
   passport,
-  email => users.find(user => user.email === email),
-  id => users.find(user => user.id === id)
+  getUserByEmail,
+  getUserById
 );
 
 const app = express();
@@ -74,10 +109,11 @@ app.use(passport.session());
 // });
 
 app.get('/', (req, res) => {
-  res.render('index');
+  res.render('index1');
 });
 
 app.get('/index1', (req, res) => {
+  console.log("index111")
   res.render('index1');
 });
 
@@ -86,9 +122,7 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
   res.render('register');
 });
 
-const getUserByEmail = (email) => {
-  return users.find((user) => user.email === email);
-};
+
 
 app.post('/register', checkNotAuthenticated, async (req, res) => {
   try {
@@ -125,16 +159,25 @@ app.get('/login', checkNotAuthenticated, (req, res) => {
   res.render('login');
 });
 
-app.post('/login', checkNotAuthenticated, (req,res) => {
-    
-  email = req.body.email
-  user = getUserByEmail(email)
-  console.log("oooooo     "+user.role)
-},passport.authenticate('local', {
+app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/login',
-  failureFlash: true}),
-  );
+  failureFlash: true
+}));
+
+app.post('/logout', function(req, res, next){
+  console.log('Logout route hit');
+  req.logout(function(err) {
+    if (err) {
+      console.error('Logout error:', err);
+      return next(err);
+    }
+    console.log('Logout successful');
+    res.redirect('/');
+  });
+});
+
+
 
 const fs = require('fs');
 
@@ -161,11 +204,13 @@ app.get('/covrege', (req, res) => {
 })
 
 app.get('/covreges',  (req, res) => {
-  // const isAuthenticated = ; // Call it as a function
-  console.log(req.isAuthenticated());
-  console.log(req.isAuthenticated()) // This will log true or false
-  res.render('covreges', { bool: true });
-  
+  isAuthenticated = req.isAuthenticated()
+  console.log(isAuthenticated)
+  if (isAuthenticated){
+    res.render('covreges', { userRole: req.user.role });
+  }else {
+    res.render('covreges', { userRole: "vistor" });
+  }
 });
 
 app.get('/events', (req,res) => {
@@ -190,17 +235,6 @@ function checkNotAuthenticated(req, res, next) {
   next()
 }
 
-app.get('/logout', (req, res) => {
-  // Call the logout method on the req object
-  req.logout((err) => {
-    if (err) {
-      // Handle the error, e.g., by redirecting to an error page
-      return res.redirect('/error');
-    }
-    // Redirect the user to a specific page after successful logout
-    res.redirect('/login');
-  });
-});
 
 
 app.listen(3000, () => {
