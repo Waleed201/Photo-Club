@@ -64,7 +64,7 @@
     align-items: center;
     justify-content: space-around;
     padding: 5px;
-    position: fixed;
+    position: relative;
     z-index: 1;
     width: 100%;
     bottom: 0;
@@ -73,37 +73,143 @@
   .btn {
     width: 35%;
   }
+  .gallery .photo .downloadIcon, .gallery .photo .eyeIcon {
+    color: #fff;
+  }
 
-  /* CSS to enlarge the image when 'enlarge' class is applied */
-.enlarge {
+
+
+  /* ------------------- */
+
+  /* below styles are for desktop (for mobile) */
+.covregeContaner {
+  width: 345px;
+  height: fit-content;
+  min-height: 85vh;
+  background-color: #1B1B1B;
+  color: aliceblue;
+  margin: auto;
+  margin-top: 13px;
+  margin-bottom: 150px;
+  padding: 13px;
+}
+
+.covregeContaner h3 {
+  font-size: 1.3rem;
+  margin: 10px 3px;
+}
+
+.covregeContaner p {
+  opacity: 0.50;
+  font-size: 0.6rem;
+  margin: 5px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1rem;
+  margin-top: 20px;
+  overflow-y: auto;
+  max-height: 62vh;
+  position: relative;
+}
+
+.gallery .photo {
+  position: relative;
+  background: white;
+  color: rgb(169, 169, 169);
+  width: 100%;
+  height: 124px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: #000;
+}
+
+.gallery .photo img {
+  width: 100%;
+  height: 90px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+
+
+
+.button-add-search {
+  background-color: #222222;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 5px;
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1.5); /* Adjust the scale as needed */
-  z-index: 9999;
-  transition: transform 0.3s ease-in-out;
-  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  z-index: 1;
+  width: 100%;
+  bottom: 0;
 }
 
-/* CSS to revert the image to its original state */
-.enlarge:hover {
-  transform: translate(-50%, -50%) scale(1.5); /* You can adjust this scale as well */
+.btn {
+  width: 35%;
 }
 
-/* CSS to make the image clickable to go back to the original state */
-.enlarge img {
-  cursor: pointer;
-}
+/* Media query for desktop screens */
+@media (min-width: 768px) {
+  .gallery .photo span {
+    position: absolute; /* Position the icons absolutely within the photo */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust for exact centering */
+    display: none; /* Hide by default */
+  }
+  .covregeContaner {
+    width: 70%; /* Increased width */
+    margin: 30px auto; /* Adjusted margin */
+    padding: 20px;
+  }
+  .gallery .photo:hover span {
+    display: flex; /* Show the icons when hovering over the photo */
+  }
+  .gallery .photo .downloadIcon, .gallery .photo .eyeIcon {
+    margin: 0 5px; /* Adjust spacing */
+    color: #000;
+  }
+  .gallery .photo img{
+    height: 100%;
+  }
 
-/* Additional styles to ensure proper display */
-.enlarge::before {
-  content: "";
-  display: block;
-  height: 100vh;
-  width: 100vw;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: transparent;
-  z-index: 9998;
+  .covregeContaner h3 {
+    font-size: 2rem; /* Larger font size for headings */
+  }
+
+  .covregeContaner p {
+    font-size: 1rem; /* Larger font size for text */
+    opacity: 0.7; /* Slightly more opaque */
+  }
+
+  .gallery {
+    grid-template-columns: repeat(4, 1fr); /* More columns for the grid */
+    grid-gap: 20px; /* Increased gap */
+    max-height: none; /* Remove max-height constraint */
+  }
+
+  .gallery .photo {
+    display: flex; /* Use flexbox for positioning */
+    height: 150px; /* Adjusted photo height */
+  }
+
+  .button-add-search {
+    padding: 10px; /* More padding for aesthetic balance */
+  }
+
+  .btn {
+    width: 20%; /* Adjusted button width */
+    font-size: 1.2rem; /* Larger font size for button text */
+  }
+
+  /* Additional styles for hover effects or other interactive elements */
+  .gallery .photo:hover {
+    transform: scale(1.05); /* Scale-up effect */
+    transition: transform 0.3s ease-in-out;
+  }
 }
