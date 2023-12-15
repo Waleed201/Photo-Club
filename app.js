@@ -130,16 +130,31 @@ function checkNotAuthenticated(req, res, next) {
 
 // Route definitions
 app.get('/', (req, res) => {
-  res.render('index');
+  const isAuthenticated = req.isAuthenticated();
+  if (isAuthenticated){
+    res.render('index', { userRole: req.user.role });
+  } else {
+    res.render('index', { userRole: "visitor" });
+  }
 });
 
 app.get('/index1', (req, res) => {
   console.log("index111");
-  res.render('index1');
+  const isAuthenticated = req.isAuthenticated();
+  if (isAuthenticated){
+    res.render('index1', { userRole: req.user.role });
+  } else {
+    res.render('index1', { userRole: "visitor" });
+  }
 });
 
 app.get('/register', checkNotAuthenticated, (req, res) => {
-  res.render('register');
+  const isAuthenticated = req.isAuthenticated();
+  if (isAuthenticated){
+    res.render('register', { userRole: req.user.role });
+  } else {
+    res.render('register', { userRole: "visitor" });
+  }
 });
 
 app.post('/register', checkNotAuthenticated, async (req, res) => {
@@ -166,7 +181,12 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
 });
 
 app.get('/login', checkNotAuthenticated, (req, res) => {
-  res.render('login');
+  const isAuthenticated = req.isAuthenticated();
+  if (isAuthenticated){
+    res.render('login', { userRole: req.user.role });
+  } else {
+    res.render('login', { userRole: "visitor" });
+  }
 });
 
 app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
@@ -220,15 +240,18 @@ app.get('/covrege', (req, res) => {
         };
       });
       console.log(files);
-      
-      res.render('covrege', { files, covrg });
+      const isAuthenticated = req.isAuthenticated();
+      if (isAuthenticated){
+        res.render('covrege', { files, covrg, userRole: req.user.role });
+      } else {
+        res.render('covrege', { files, covrg, userRole: "visitor" });
+      }
     }
   });
 });
 
 app.get('/covreges',  (req, res) => {
   const isAuthenticated = req.isAuthenticated();
-  console.log(isAuthenticated);
   if (isAuthenticated){
     res.render('covreges', { userRole: req.user.role });
   } else {
@@ -237,7 +260,12 @@ app.get('/covreges',  (req, res) => {
 });
 
 app.get('/events', (req, res) => {
-  res.render('events');
+  const isAuthenticated = req.isAuthenticated();
+  if (isAuthenticated){
+    res.render('events', { userRole: req.user.role });
+  } else {
+    res.render('events', { userRole: "visitor" });
+  }
 });
 
 // AWS S3 File Operations Routes

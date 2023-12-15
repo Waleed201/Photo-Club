@@ -12,12 +12,14 @@
     <rect x="6" y="16" width="35" height="6" rx="3" fill="#E8E8E8" />
     <rect x="6" y="26" width="35" height="6" rx="3" fill="#E8E8E8" />
 </svg>
-<div class="menu" id="dropdownMenu">
+<div class="menu" id="dropdownMenu" style="width: 400px;">
     <i id="xIcon" class="bi bi-x-circle-fill"></i>
     <i id="profileIcon" class="bi bi-person-circle"></i>
-    <form action="/logout" method="POST">
-        <button type="submit">Log Out</button>
-    </form>
+    <% if (userRole!="visitor") { %>
+        <form action="/logout" method="POST">
+          <button type="submit">Logout</button>
+        </form>
+      <% } %>
     <a href="/">Home</a>
     <a href="covreges">covreges</a>
     <a href="events">Events</a>
