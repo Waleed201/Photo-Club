@@ -1,10 +1,28 @@
+# FR.py 
+
 import boto3
 import face_recognition
 import io
 from PIL import Image
+from botocore.client import Config
+from tkinter import filedialog
+
+
+
+
+access_key_id = 'AKIAYGINPQ2H42KMVZM3'
+secret_access_key = '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'
+region_name = 'eu-north-1'
+
 
 # Initialize boto3 client for S3
-s3 = boto3.client('s3')
+s3 = boto3.client(
+    's3',
+    aws_access_key_id=access_key_id,
+    aws_secret_access_key=secret_access_key,
+    region_name=region_name,
+    config=Config(signature_version='s3v4')
+)
 
 def search_faces(bucket_name = 'photo-club-s3', folder_name='sampleImages', face_to_find_key =''):
     # Download the reference image from S3
@@ -43,6 +61,15 @@ def search_faces(bucket_name = 'photo-club-s3', folder_name='sampleImages', face
 bucket_name = 'photo-club-s3'
 folder_name = 'sampleImages'
 face_image_key = 'sampleImages/mansOFF.jpg'  # S3 key for the reference image
+
+
+# Display the dialog for browsing files.
+filename = filedialog.askopenfilename()
+# Print the selected file path.
+print(filename)
+
+
+
 matching_images = search_faces(bucket_name, folder_name, face_image_key)
 
 print(matching_images)

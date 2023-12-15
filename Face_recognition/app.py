@@ -1,3 +1,5 @@
+# app.py
+
 from flask import Flask, request, render_template
 import FR  # Import your face recognition script here
 
