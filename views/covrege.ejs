@@ -78,10 +78,6 @@
 
   <script>
 
-  
- 
-
-
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -90,29 +86,28 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     document.getElementById('fileInput').addEventListener('change', function (event) {
-          var files = event.target.files;
-          if (files) {
+        var files = event.target.files;
+        if (files) {
             var formData = new FormData();
             for (var i = 0; i < files.length; i++) {
-              formData.append('files', files[i]);
+                formData.append('files', files[i]);
             }
             formData.append('folder', '<%= covrg.ceremonyTitle %>'); // Set folder name
 
             // Make an AJAX request to the server
             fetch('/upload', {
-              method: 'POST',
-              body: formData
+                method: 'POST',
+                body: formData
             }).then(response => {
-              if (response.ok) {
-                console.log('Files uploaded successfully');
-              } else {
-                console.error('Upload failed');
-              }
+                if (response.ok) {
+                    console.log('Files uploaded successfully');
+                    window.location.reload(); // Reload the page after successful upload
+                } else {
+                    console.error('Upload failed');
+                }
             }).catch(err => console.error('Error:', err));
-          }
-        });
-        window.location.reload();
-        console.log('Files uploaded successfully');
+        }
+    });
 });
 
 
