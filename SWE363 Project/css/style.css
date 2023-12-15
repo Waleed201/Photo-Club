@@ -166,3 +166,11 @@ main {
     position: relative;
     top: 90px;
 }
+
+.menu form {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
