@@ -23,6 +23,7 @@
   </header>
 
   <main>
+    <img src="" id="largeImage">
     <div class="covregeContaner">
       <h3>
         <%= covrg.ceremonyTitle %>
@@ -55,44 +56,54 @@
   </main>
 
   <script>
-    
-    dow = document.getElementsByClassName('downloadIcon');
-    vew = document.getElementsByClassName('eyeIcon');
-    
-    for (let i = 0; i < dow.length; i++) {
-      dow[i].addEventListener('click', function () {
-        var url = this.parentElement.parentElement.children[0].src;
-        var link = document.createElement('a');
-        link.href = url;
-        link.download = url.substr(url.lastIndexOf('/') + 1);
-        link.click();
-      });
-    }
 
+    let largeImage = document.getElementById('largeImage');
+
+    document.querySelector('body').addEventListener('click', function (e) {
+      if (e.target.class !== 'eyeIcon' ) {
+        console.log('imagedeleted');
+        largeImage.src = '';
+      }
+    });
 
     function attachDownloadHandlers() {
-    var downloadIcons = document.getElementsByClassName('downloadIcon');
-    for (var i = 0; i < downloadIcons.length; i++) {
-      downloadIcons[i].addEventListener('click', function () {
-        var url = this.parentElement.parentElement.children[0].src;
-        var link = document.createElement('a');
-        link.href = url;
-        link.download = url.substr(url.lastIndexOf('/') + 1);
-        link.click();
-      });
+      var downloadIcons = document.getElementsByClassName('downloadIcon');
+      for (var i = 0; i < downloadIcons.length; i++) {
+        downloadIcons[i].addEventListener('click', function () {
+          var url = this.parentElement.parentElement.children[0].src;
+          var link = document.createElement('a');
+          link.href = url;
+          link.download = url.substr(url.lastIndexOf('/') + 1);
+          link.click();
+        });
+      }
     }
-  }
-    
+
     function attachViewHandlers() {
-      var viewIcons = document.getElementsByClassName('eyeIcon');
-      
-    }
-    
+  var viewIcons = document.getElementsByClassName('eyeIcon');
+  for (var i = 0; i < viewIcons.length; i++) {
+    viewIcons[i].addEventListener('click', function (e) {
+      var url = this.parentElement.parentElement.children[0].src;
+      console.log(url);
+      largen(url);
+    });
+  }
+}
+    function largen(url){
+      largeImage.src = url;
+      largeImage.style.display = 'absolute';
+      largeImage.style.width = '100%';
+      console.log(largeImage.src);
+    } 
+
+
+
+
     attachDownloadHandlers();
     attachViewHandlers();
-  
-  
-  
+
+
+  </script>
   
   
   
