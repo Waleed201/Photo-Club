@@ -6,13 +6,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="icon" href="./photo-club-icon.ico" type="image/x-icon">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="covregeCard.css">
     <link rel="stylesheet" href="covrege.css">
+    <link rel="stylesheet" href="login.css">
+    <style>
+        .submiter {
+            display: none;
+        }
 
-    
+        .submationContaner {
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            background-color: black;
+            opacity: 0.7;
+            z-index: 2;
+        }
+
+        .SubmationForm {
+            min-height: 300px;
+            height: fit-content;
+            width: 50%;
+            background-color: black;
+            z-index: 2;
+            position: fixed;
+            left: 0;
+            right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 20%;
+            /* Need a specific value to work */
+
+        }
+    </style>
+
+
     <title>Coverages</title>
 </head>
 
@@ -23,40 +58,65 @@
 
     </header>
 
-        <main>
-            <section class="cardsContainer">
-                <div>
-                    <h1>Coverages</h1>
-                    <div class="coverageCard">
-                        <img src="./5ec2a64acde913370c38338d8062af1d.jpeg" alt="">
-                        <p class="cardTitle">Ceremony honoring club presidents</p>
-                        <P class="cardDate">2023/12/4</P>
-                    </div>
-                    <div class="coverageCard">
-                        <img src="./5ec2a64acde913370c38338d8062af1d.jpeg" alt="">
-                        <p class="cardTitle">Ceremony honoring club presidents</p>
-                        <P class="cardDate">2023/12/4</P>
-                    </div>
-                    <div class="coverageCard">
-                        <img src="./5ec2a64acde913370c38338d8062af1d.jpeg" alt="">
-                        <p class="cardTitle">Ceremony honoring club presidents</p>
-                        <P class="cardDate">2023/12/4</P>
-                    </div>
-                    <div class="coverageCard">
-                        <img src="./5ec2a64acde913370c38338d8062af1d.jpeg" alt="">
-                        <p class="cardTitle">Ceremony honoring club presidents</p>
-                        <P class="cardDate">2023/12/4</P>
-                    </div>
-                    <div class="coverageCard">
-                        <img src="./5ec2a64acde913370c38338d8062af1d.jpeg" alt="">
-                        <p class="cardTitle">Ceremony honoring club presidents</p>
-                        <P class="cardDate">2023/12/4</P>
-                    </div>
-    
+
+
+
+    <div class="submiter">
+        <div class="submationContaner"></div>
+        <form action="addCovrege" method="POST" class="login-form SubmationForm">
+            <i class="bi bi-x" style="color: aliceblue; font-size: 27px;"></i>
+            <h2>Covrege</h2>
+            <div>
+                <label for="name">Convrege Name</label>
+                <br>
+                <input type="text" id="covregeName" name="covregeName" required>
+            </div>
+
+            <div>
+                <label for="details">Convrege Details</label>
+                <br>
+                <input type="text" id="details" name="details" required>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+
+    <main>
+        <section class="cardsContainer">
+            <div>
+                <h1>Coverages</h1>
+                <div class="coverageCard">
+                    <img src="./5ec2a64acde913370c38338d8062af1d.jpeg" alt="">
+                    <p class="cardTitle">Ceremony honoring club presidents</p>
+                    <P class="cardDate">2023/12/4</P>
+                </div>
+                <div class="coverageCard">
+                    <img src="./5ec2a64acde913370c38338d8062af1d.jpeg" alt="">
+                    <p class="cardTitle">Ceremony honoring club presidents</p>
+                    <P class="cardDate">2023/12/4</P>
+                </div>
+                <div class="coverageCard">
+                    <img src="./5ec2a64acde913370c38338d8062af1d.jpeg" alt="">
+                    <p class="cardTitle">Ceremony honoring club presidents</p>
+                    <P class="cardDate">2023/12/4</P>
+                </div>
+                <div class="coverageCard">
+                    <img src="./5ec2a64acde913370c38338d8062af1d.jpeg" alt="">
+                    <p class="cardTitle">Ceremony honoring club presidents</p>
+                    <P class="cardDate">2023/12/4</P>
+                </div>
+                <div class="coverageCard">
+                    <img src="./5ec2a64acde913370c38338d8062af1d.jpeg" alt="">
+                    <p class="cardTitle">Ceremony honoring club presidents</p>
+                    <P class="cardDate">2023/12/4</P>
                 </div>
 
+            </div>
 
-                <!-- <div class="coverageCard">
+
+            <!-- <div class="coverageCard">
                     <img src="<%# imagePath %>" alt="">
                     <p class="cardTitle">
                         <%# ceremonyTitle %>
@@ -66,28 +126,42 @@
                     </p>
                 </div> -->
 
-            </section>
+        </section>
 
-            <% if (userRole == "admin") { %>
+        <% if (userRole=="admin" ) { %>
 
             <div class="button-add-search">
                 <button type="button" id="addButton" class="btn btn-outline-primary">Add</button>
-                <button type="button" class="btn btn-outline-secondary">Search</button>
+                <!-- <button type="button" class="btn btn-outline-secondary">Search</button> -->
             </div>
+
+            <script>
+                const btnAdd = document.querySelector("#addButton");
+                const submiter = document.querySelector(".submiter");
+                const x_icon = document.querySelector(".bi-x")
+
+                btnAdd.addEventListener('click', function () {
+                    submiter.style.display = "block";
+                });
+
+                x_icon.addEventListener('click', function() {
+                    submiter.style.display = "none";
+                })
+
+            </script>
+
             <% } %>
 
-        </main>
-        <script>
-            cvCard = document.querySelectorAll(".coverageCard");
-            cvCard.forEach(element => {
-                element.addEventListener('click', function() {
+    </main>
+    <script>
+        cvCard = document.querySelectorAll(".coverageCard");
+        cvCard.forEach(element => {
+            element.addEventListener('click', function () {
                 window.location.href = 'covrege'
-            }); 
-        
-            // console.log(bool)
+            });
         })
-        </script>
-        
+    </script>
+
 
 </body>
 
