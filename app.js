@@ -10,6 +10,7 @@ const multer = require('multer');
 const AWS = require('aws-sdk');
 const initializePassport = require('./passport-config');
 
+
 const app = express();
 
 // Configure AWS S3
@@ -36,7 +37,7 @@ async function eee(str) {
     const a = await bcrypt.hash(str, 10);
     return a;
   }
-   
+
   (async () => {
     var hashedPassword = await eee("admin");
   
@@ -48,7 +49,7 @@ async function eee(str) {
       role: 'admin'
     })
     
-     hashedPassword = await eee("member");
+    hashedPassword = await eee("member");
     users.push({
       id: Date.now().toString(),
       name: "admin",
@@ -107,6 +108,7 @@ app.use(express.static('./SWE363 Project/css'));
 app.use(express.static('./SWE363 Project/fonts'));
 app.use(express.static('./SWE363 Project/js')); // Changed 'JS' to 'js' for consistency
 app.use(express.static('./SWE363 Project/images'));
+app.use(express.static('./Face_recognition/your_script.by'))
 app.use(methodOverride('_method'));
 
 function checkAuthenticated(req, res, next) {
@@ -187,18 +189,36 @@ let covrg = {
     "https://lh3.googleusercontent.com/fife/AGXqzDmT87diGBY96akkAyQxKrN0YeY1nemEXD5zI1Ji6wNHMYdN7OHbMFT3GM5kA_A1_-fALwCbG3jogjboXwuiPcOVyNPsNBbhA39t_Km8CmRJJ45SjpDuBa6vSIyjCWVQFT2W-DPm31zOZD4-XPXdiMSxP-0yVs6zpAMjj2I6E0A7O2YF9ozj1NSXkiAc66rRh36irggFrbTixbQPgPgEvhhNM9o0M5JJSQ3BDq2dqiIHm9KAxPQZIB9A3MIhppuXHr8Dz2nZIkutmtA8asevlJPufirImVLlsRqh2nKWKzcrTHN6L7lfir_2kK4ov96FUsct8viI8o4V0dRSM0XTbcm34OZWi8V83HDx16e3J3bD5UpW4icyuB8w1TtUi57ZjcXGQ08T3hFl2bEO8L-pQkbfrJeyG4A3Oq_xC4s4IL6NtnYlDvzRX12941-aD2SjRv4_7MkA4OdCriNXOi0LeZf364TltBYiGXAtwwCuKqgm9wFMs9taQ3KRpktGEkB9rG9n9eaAX0HPxCWQneS8o66akN1td3wZ_YXebBpZObm1SXo182dbGVNGJCVQ3uR6rCm3HhIsjksYXeHBAeMg0aAQ4Ognx7dcmfHfhY_B60vR7t1_fqi7IpaansBgmBdemm5LZC2x3EnE2vdDNIKKecKZT0xg9eEtV9NSFfivhE4mIkTJ_AcAcZsUs6tXu-POsuo5VRSS-6Rnpp-cDjhlrkMLEckkxwOKxt5XPSQpH90Qti83gXjdLMQzcZBTioeg-kyUKoAksf1CX04RmaKJGa1k86Hfu2Ov5-2EKk_Hr-pL2XuuNmNdShSsSzHC_aM0BQUgHvOda5byfHaoh4ZHFcbNmzODADQUswgVbydbuwP6RdICGJ-v4vNK8FHBGUYvbupwJHlDVJYbTgeHmYNKPuMmk8fDE9OQQlBWpwVpf2-G-dA=w1194-h1470"
   ]
 };
+
+
+
+
+
+
+
+
+
 app.get('/covrege', (req, res) => {
   const s3 = createS3Instance();
   const listParams = { Bucket: BUCKETNAME };
+
   s3.listObjectsV2(listParams, (err, data) => {
     if (err) {
       console.log(err);
       res.status(500).send("Internal Server Error");
     } else {
-      const files = data.Contents.map(file => ({
-        name: file.Key,
-        url: `https://${BUCKETNAME}.s3.amazonaws.com/${file.Key}`
-      }));
+      const files = data.Contents.map(file => {
+        const folderName = path.dirname(file.Key); // Fix the syntax error by changing 'file.key' to 'file.Key'
+        const fileName = path.basename(file.Key); // Fix the syntax error by changing 'file.key' to 'file.Key'
+
+        return {
+          folder: folderName,
+          name: fileName,
+          url: `https://${BUCKETNAME}.s3.amazonaws.com/${file.Key}`
+        };
+      });
+      console.log(files);
+      
       res.render('covrege', { files, covrg });
     }
   });
@@ -227,9 +247,11 @@ app.get('/files', (req, res) => {
       res.status(500).send("Internal Server Error");
     } else {
       const files = data.Contents.map(file => ({
-        name: file.Key,
-        url: `https://${BUCKETNAME}.s3.amazonaws.com/${file.Key}`
-      }));
+      name: file.Key,
+      
+      url: `https://${BUCKETNAME}.s3.amazonaws.com/${file.Key}`
+    }));
+      
       res.json(files);
     }
   });
