@@ -73,3 +73,37 @@
   .btn {
     width: 35%;
   }
+
+  /* CSS to enlarge the image when 'enlarge' class is applied */
+.enlarge {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.5); /* Adjust the scale as needed */
+  z-index: 9999;
+  transition: transform 0.3s ease-in-out;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+}
+
+/* CSS to revert the image to its original state */
+.enlarge:hover {
+  transform: translate(-50%, -50%) scale(1.5); /* You can adjust this scale as well */
+}
+
+/* CSS to make the image clickable to go back to the original state */
+.enlarge img {
+  cursor: pointer;
+}
+
+/* Additional styles to ensure proper display */
+.enlarge::before {
+  content: "";
+  display: block;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: transparent;
+  z-index: 9998;
+}
