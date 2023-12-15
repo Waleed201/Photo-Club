@@ -15,15 +15,33 @@
   <title>
     <%= covrg.ceremonyTitle %>
   </title>
+  <style>
+    #bigdiv {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0.9);
+    }
+  </style>
 </head>
 
 <body>
+  <div id="bigdiv">
+    <img src="" id="largeImage">
+  </div>
   <header>
     <%- include('header') %>
   </header>
 
   <main>
-    <img src="" id="largeImage">
+    
+    
     <div class="covregeContaner">
       <h3>
         <%= covrg.ceremonyTitle %>
@@ -58,11 +76,11 @@
   <script>
 
     let largeImage = document.getElementById('largeImage');
-
-    document.querySelector('body').addEventListener('click', function (e) {
+    largeImage.display = 'none';
+    document.querySelector('#bigdiv').addEventListener('click', function (e) {
       if (e.target.class !== 'eyeIcon' ) {
-        console.log('imagedeleted');
         largeImage.src = '';
+        bigdiv.style.display = 'none';
       }
     });
 
@@ -84,16 +102,22 @@
   for (var i = 0; i < viewIcons.length; i++) {
     viewIcons[i].addEventListener('click', function (e) {
       var url = this.parentElement.parentElement.children[0].src;
-      console.log(url);
       largen(url);
     });
   }
 }
     function largen(url){
+      bigdiv = document.getElementById('bigdiv')
+      bigdiv.style.display = 'flex';
+      bigdiv.style.opicity = '0.9';
+      bigdiv.style.width = window.innerWidth + 'px';
+      bigdiv.style.height = window.innerHeight + 'px';
+      bigdiv.style.position = 'fixed';
       largeImage.src = url;
-      largeImage.style.display = 'absolute';
-      largeImage.style.width = '100%';
-      console.log(largeImage.src);
+      largeImage.style.zIndex = '100';
+      largeImage.style.maxWidth = '80%';
+      largeImage.style.maxHeight = '90%';
+
     } 
 
 
@@ -106,11 +130,6 @@
   </script>
   
   
-  
-  
-  
-  
-  </script>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.9.2/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
