@@ -14,6 +14,8 @@
   <link rel="stylesheet" href="covrege.css">
   <link rel="icon" href="./photo-club-icon.ico" type="image/x-icon">
 
+  
+
   <title>
     <%= covrg.ceremonyTitle %>
   </title>
@@ -70,9 +72,32 @@
 
   </main>
 
-  <script>
-// function for the serach in python for face_recognition
+  <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 
+<!-- Other script tags -->
+<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>  -->
+
+  <script>
+$(document).ready(() => {
+    fetchFile(); // Call the fetchFile function.
+});
+
+// Defines the fetchFile function.
+function fetchFile() {
+    // Send an AJAX GET request to the '/files' URL.
+    $.ajax({
+        url: '/files', // URL to fetch files from.
+        method: 'GET', // HTTP method used.
+        success: function(data) { // Function to call when request is successful.
+            
+            attachDownloadHandlers(); // Attach event handlers to download buttons.
+            attachDeleteHandlers(); // Attach event handlers to delete buttons.
+        },
+        error: function(xhr, status, error) { // Function to call when request fails.
+            console.error("Error fetching files: " + error); // Log error to console.
+        }
+    });
+}
 // Upload files
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('addButton').addEventListener('click', function () {
@@ -151,23 +176,46 @@ document.addEventListener('DOMContentLoaded', function () {
 
     } 
 
+    attachDeleteHandlers();
 
 
+    function attachDeleteHandlers() {
+      $('.deleteIcon').click(function() {
+        console.log("delete clicked");
+        var fileName = $(this).data('name');
+        if(confirm("Are you sure you want to delete the file " + fileName + "?")){
+          deleteFile(fileName);
+        }
+      });
+    }
+
+    function deleteFile(fileName) {
+      $.ajax({
+        url: '/files/' + fileName,
+        method: 'DELETE',
+        success: function() {
+          fetchFile();
+        },
+        error: function(error) {
+          console.error("Error deleting file: " + error);
+        }
+      });
+    }
 
     attachDownloadHandlers();
     attachViewHandlers();
 
 
-  </script>
-  
-  
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.9.2/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </script>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script> -->
 
-</body>
 
-</html>
+    </body>
+
+    </html>

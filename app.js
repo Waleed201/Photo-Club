@@ -239,7 +239,6 @@ app.get('/covrege', (req, res) => {
           url: `https://${BUCKETNAME}.s3.amazonaws.com/${file.Key}`
         };
       });
-      console.log(files);
       const isAuthenticated = req.isAuthenticated();
       if (isAuthenticated){
         res.render('covrege', { files, covrg, userRole: req.user.role });
