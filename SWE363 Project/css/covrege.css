@@ -23,12 +23,10 @@
   .gallery {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    /* 2 columns */
     grid-gap: 1rem;
     margin-top: 20px;
     overflow-y: auto;
-    /* Enables vertical scrolling */
-    /* Set a maximum height */
+    margin-bottom: 10%;
     max-height: 62vh;
     position: relative;
   }
