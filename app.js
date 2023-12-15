@@ -111,7 +111,7 @@ app.use(passport.session());
 // });
 
 app.get('/', (req, res) => {
-  res.render('index1');
+  res.render('index');
 });
 
 app.get('/index1', (req, res) => {
