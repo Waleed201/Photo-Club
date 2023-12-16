@@ -248,4 +248,29 @@ main {
     }
     
   }
-  
+
+
+
+.menu a:nth-child(3):hover {
+    border-top-color: #a23a39; /* Change the border-top color on hover for the second item */
+}
+
+.menu a:nth-child(4):hover {
+    border-top-color: #37759e; /* Change the border-top color on hover for the second item */
+}
+
+.menu a:nth-child(5):hover {
+    border-top-color: #d2bb46; /* Change the border-top color on hover for the second item */
+}
+
+.menu a:nth-child(6):hover {
+    border-top-color: #63a748; /* Change the border-top color on hover for the second item */
+}
+
+.menu a:nth-child(7):hover {
+    border-top-color: #a23a39; /* Change the border-top color on hover for the first item */
+}
+
+.menu a:nth-child(8):hover {
+    border-top-color: #37759e; /* Change the border-top color on hover for the second item */
+}
