@@ -137,6 +137,16 @@ app.get('/', (req, res) => {
   }
 });
 
+app.get('/index1', (req, res) => {
+  console.log("index111");
+  const isAuthenticated = req.isAuthenticated();
+  if (isAuthenticated){
+    res.render('index1', { userRole: req.user.role, userName: req.user.name });
+  } else {
+    res.render('index1', { userRole: "visitor" });
+  }
+});
+
 
 
 app.get('/register', checkNotAuthenticated, (req, res) => {
