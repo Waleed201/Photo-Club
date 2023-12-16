@@ -64,11 +64,17 @@
         <input required id="fileInput" type="file" name="files" multiple class="form-control" style="display: none;">
         <input required type="text" name="folder" placeholder="folder name" class="form-control" value="<%= covrg.ceremonyTitle %>">
       </form>
-    
-      <button type="button" id="addButton" class="btn btn-outline-primary">Add</button>
+
+      <form action="/search" method="post" enctype="multipart/form-data" style="display: none;">
+        <input required id="fileSearch" type="file" name="files" multiple class="form-control" style="display: none;">
+        <input required type="text" name="folder" placeholder="folder name" class="form-control" >
+      </form>
+
+      <% if (userRole=="admin" || userRole=="user" ) { %>
+        <button type="button" id="addButton" class="btn btn-outline-primary">Add</button>
+      <% } %>
       <button type="button" id="searchButton" class="btn btn-outline-secondary">Search</button>
-    </div>
-    
+      </div>
 
   </main>
 
@@ -103,7 +109,59 @@ function fetchFile() {
 
 
 
-// Upload files
+// Upload files// search files 
+document.addEventListener('DOMContentLoaded', function () {
+
+  document.getElementById('searchButton').addEventListener('click', function () {
+    document.getElementById('fileSearch').click();
+  });
+
+    document.getElementById('fileSearch').addEventListener('change',function () {
+      // add image to tmp folder
+      console.log('search clicked');
+      var image = event.target.files[0];
+      if (image){
+        var formData = new FormData();
+        formData.append('files', image);
+        formData.append('folder', 'searchTemp');  
+        fetch('/upload', {
+          method: 'POST',
+          body: formData
+        }).then(response => {
+          if (response.ok) {
+            console.log('Files uploaded successfully');
+          } else {
+            console.error('Upload failed');
+          }
+        }).catch(err => console.error('Error:', err));
+
+
+      // search image
+      // Send a POST request to the server
+    
+      fetch('/search', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"folder": "<%= covrg.ceremonyTitle %>",
+         "img":`searchTemp/${image.name}`})
+      })
+        .then(response => {
+          if (response.ok) {
+            console.log(response.json());
+            // Handle the response from the server
+          } else {
+            console.error('Search request failed');
+          }
+        })
+        .catch(err => console.error('Error:', err));
+
+      }
+      
+    });
+    })
+// upload images
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('addButton').addEventListener('click', function () {
         document.getElementById('fileInput').click();
