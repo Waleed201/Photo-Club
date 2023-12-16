@@ -222,7 +222,6 @@ app.delete('/files/:name', (req, res) => {
           console.log(err); // Log any errors to the console
           res.status(500).send("Internal Server Error"); // Send a 500 error response on failure
       } else {
-        console.log("dddddd")
           res.send("File deleted successfully"); // Confirm deletion success
       }
   });
@@ -271,13 +270,54 @@ app.post('/search', async (req, res) => {
 
 app.get('/covrege', (req, res) => {
   const s3 = createS3Instance();
-  const listParams = { Bucket: BUCKETNAME };
+  const listParams = { Bucket: BUCKETNAME }; // Add Delimiter parameter to list only folders
 
   s3.listObjectsV2(listParams, (err, data) => {
     if (err) {
       console.log(err);
       res.status(500).send("Internal Server Error");
     } else {
+      console.log(folders);
+      const files = data.Contents.map(file => {
+        const folderName = path.dirname(file.Key);
+        const fileName = path.basename(file.Key);
+        var encodedFileName = encodeURIComponent(folderName+"/"+fileName);
+        return {
+          folder: folderName,
+          name: fileName,
+          url: `https://${BUCKETNAME}.s3.amazonaws.com/${file.Key}`,
+          encodedurl: encodedFileName
+        };
+      });
+      const isAuthenticated = req.isAuthenticated();
+      if (isAuthenticated){
+        res.render('covrege', {  files, covrg, userRole: req.user.role, userName: req.user.name });
+      } else {
+        res.render('covrege', {  files, covrg, userRole: "visitor" });
+      }
+    }
+  });
+});
+
+app.get('/covreges',  (req, res) => {
+  const s3 = createS3Instance();
+  const listParams = { Bucket: BUCKETNAME, Delimiter: '/' }; // Add Delimiter parameter to list only folders
+  const listParams2 = { Bucket: BUCKETNAME }; // Add Delimiter parameter to list only folders
+  s3.listObjectsV2(listParams, (err, data) => {
+    if (err){
+      console.log(err);
+      res.status(500).send("Internal Server Error");
+    } else {
+      return folders = data.CommonPrefixes.map(prefix => prefix.Prefix.replace('/', '')); // Extract folder names from CommonPrefixes
+    }
+    });
+  s3.listObjectsV2(listParams2, (err, data) => {
+    console.log(data)
+    if (err) {
+      console.log(err);
+      res.status(500).send("Internal Server Error");
+    } else {
+
       const files = data.Contents.map(file => {
         const folderName = path.dirname(file.Key); // Fix the syntax error by changing 'file.key' to 'file.Key'
         const fileName = path.basename(file.Key); // Fix the syntax error by changing 'file.key' to 'file.Key'
@@ -287,27 +327,19 @@ app.get('/covrege', (req, res) => {
           name: fileName,
           url: `https://${BUCKETNAME}.s3.amazonaws.com/${file.Key}`,
           encodedurl: encodedFileName
-
         };
       });
-      const isAuthenticated = req.isAuthenticated();
-      if (isAuthenticated){
-        res.render('covrege', { files, covrg, userRole: req.user.role, userName: req.user.name });
-      } else {
-        res.render('covrege', { files, covrg, userRole: "visitor" });
-      }
+      // console.log(folders)
+      // console.log(files)
+      
     }
   });
-});
-
-app.get('/covreges',  (req, res) => {
   const isAuthenticated = req.isAuthenticated();
-  if (isAuthenticated){
-    res.render('covreges', { userRole: req.user.role, userName: req.user.name });
-  } else {
-    res.render('covreges', { userRole: "visitor" });
-  }
-
+      if (isAuthenticated){
+        res.render('covreges', {folders, files, userRole: req.user.role, userName: req.user.name });
+      } else {
+        res.render('covreges', {folders, files,  userRole: "visitor" });
+      }
 });
 
 app.get('/events', (req, res) => {
@@ -351,7 +383,7 @@ app.post('/upload', upload.array('files'), (req, res) => {
     return s3.upload(uploadParams).promise();
   });
   Promise.all(uploadPromises)
-    .then(() => res.redirect('/'))
+    .then(() => res.redirect('/covreges'))
     .catch(err => res.status(500).json({ error: 'Error -> ' + err }));
 });
 

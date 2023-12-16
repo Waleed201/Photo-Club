@@ -71,21 +71,18 @@
 
     <div class="submiter">
         <div class="submationContaner"></div>
-        <form action="/upload" method="POST" class="login-form SubmationForm">
+        
+        <form action="/upload" method="POST" enctype="multipart/form-data" class="login-form SubmationForm">
             <i class="bi bi-x" style="color: aliceblue; font-size: 27px;"></i>
             <h2>Covrege</h2>
             <div>
                 <label for="name">Convrege Name</label>
                 <br>
-                <input type="text" id="covregeName" name="folder" required>
+                <input required type="text" name="folder" placeholder="folder name" class="form-control" >
             </div>
-
-
             <label for="imagesFiles">Add Images</label>
             <br>
-            <input type="file" id="imagesFiles" name="images" required>
-
-
+            <input required id="fileInput" type="file" name="files" multiple class="form-control" >
             <button type="submit">Submit</button>
         </form>
     </div>
@@ -94,44 +91,22 @@
     <main>
         <section class="cardsContainer">
             <h1>Coverages</h1>
-                <div class="cont ">
-                    <div class="coverageCard ">
-                        <img src="./5ec2a64acde913370c38338d8062af1d.jpeg" alt="">
-                        <p class="cardTitle">Ceremony honoring club presidents</p>
-                        <P class="cardDate">2023/12/4</P>
-                    </div>
-                    <div class="coverageCard ">
-                        <img src="./5ec2a64acde913370c38338d8062af1d.jpeg" alt="">
-                        <p class="cardTitle">Ceremony honoring club presidents</p>
-                        <P class="cardDate">2023/12/4</P>
-                    </div>
-                    <div class="coverageCard ">
-                        <img src="./5ec2a64acde913370c38338d8062af1d.jpeg" alt="">
-                        <p class="cardTitle">Ceremony honoring club presidents</p>
-                        <P class="cardDate">2023/12/4</P>
-                    </div>
-                    <div class="coverageCard ">
-                        <img src="./5ec2a64acde913370c38338d8062af1d.jpeg" alt="">
-                        <p class="cardTitle">Ceremony honoring club presidents</p>
-                        <P class="cardDate">2023/12/4</P>
-                    </div>
-                    <div class="coverageCard ">
-                        <img src="./5ec2a64acde913370c38338d8062af1d.jpeg" alt="">
-                        <p class="cardTitle">Ceremony honoring club presidents</p>
-                        <P class="cardDate">2023/12/4</P>
-                    </div>
-                
+            <% folders.forEach(function(folder) { %>
+                <% console.log(folder) %>
+                <div class="cont">
+                  <div class="coverageCard">
+                    <% console.log(files) %>
+                    <% files.filter(file => file.folder === folder).forEach(function(file) { %>
+                        <% if (file.folder === folder) { %>
+                            <img src="<%= file.url %>" alt="">
+                            <p class="cardTitle"><%= folder %></p>
+                        <% } %>
+                    <% }); %>
+                  </div>
                 </div>
+              <% }); %>
+              
 
-            <!-- <div class="coverageCard">
-                    <img src="<%# imagePath %>" alt="">
-                    <p class="cardTitle">
-                        <%# ceremonyTitle %>
-                    </p>
-                    <p class="cardDate">
-                        <%# ceremonyDate %>
-                    </p>
-                </div> -->
 
         </section>
 
@@ -167,6 +142,37 @@
                 window.location.href = 'covrege'
             });
         })
+
+
+        // upload images
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('addButton').addEventListener('click', function () {
+    });
+
+    document.getElementById('fileInput').addEventListener('change', function (event) {
+        var files = event.target.files;
+        if (files) {
+            var formData = new FormData();
+            for (var i = 0; i < files.length; i++) {
+                formData.append('files', files[i]);
+            }
+            formData.append('folder', document.getElementById('folderInput').value); // Set folder name
+
+            // Make an AJAX request to the server
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            }).then(response => {
+                if (response.ok) {
+                    console.log('Files uploaded successfully');
+                    window.location.reload(); // Reload the page after successful upload
+                } else {
+                    console.error('Upload failed');
+                }
+            }).catch(err => console.error('Error:', err));
+        }
+    });
+});
     </script>
 
 
