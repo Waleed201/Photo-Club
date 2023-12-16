@@ -53,6 +53,7 @@ body {
 header {
     background-color: #222222;
     display: flex;
+    flex-direction: column;
     align-items: center;
     padding: 5px;
     position: fixed;
@@ -92,17 +93,24 @@ h3 {
     font-weight: 600;
 }
 
+header .line {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
 
-header>svg {
+}
+
+
+
+header #menuIcon {
     margin-left: auto;
-    cursor: pointer;
+    cursor: pointer;    
 }
 
 .menu {
     display: none;
     flex-direction: column;
     color: #E8E8E8;
-    position: fixed;
     z-index: 1;
     gap: 10px;
     height: 100%;
@@ -117,6 +125,10 @@ header>svg {
     transform: translateX(100%);
     transition: all 700ms cubic-bezier(.9, 0, .33, 1);
 }
+
+
+
+
 
 .menu.fade-in {
     display: flex;
@@ -156,7 +168,7 @@ section {
     margin: 10px 10%;
 }
 
-section > div {
+section>div {
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -178,3 +190,49 @@ main {
     display: flex;
     justify-content: center;
 }
+
+@media (min-width: 768px) {
+    #menuIcon {
+        display: none;    
+    }
+        
+    .menu {
+        display: flex;
+        flex-direction: row;
+        justify-content:flex-start;
+        align-items: center;
+        color: #E8E8E8;
+        z-index: 1;
+        gap: 55px;
+        width: 100%;
+        position: relative;
+        background-color: #222222;
+        opacity: 1;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transform: translateX(0);
+        padding: 5px;
+    }
+
+    .menu .bi {
+        display: none;
+    }
+
+    .menu a {
+        padding: 0%;
+    }
+    
+    .menu form {
+        margin-left: auto;
+    }
+
+    .menu button {
+        min-width: 100px;
+    }
+
+    main {
+        position: relative;
+        top: 130px;
+    }
+    
+  }
+  

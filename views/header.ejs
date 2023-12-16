@@ -1,31 +1,34 @@
-<a href="/">
-    <img src="./photo-club-icon.ico" alt="KFUPM Photo club icon">
-</a>
-<a href="/">
-<span>
-    <h1>KFUPM</h1>
-    <h2>PHOTOCLUB</h2>
-</span>
-</a>
-<svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" width="46" height="38" viewBox="0 0 46 38" fill="none">
-    <rect x="6" y="6" width="35" height="6" rx="3" fill="#E8E8E8" />
-    <rect x="6" y="16" width="35" height="6" rx="3" fill="#E8E8E8" />
-    <rect x="6" y="26" width="35" height="6" rx="3" fill="#E8E8E8" />
-</svg>
-<div class="menu" id="dropdownMenu" style="width: 400px;">
+<div class="line">
+    <a href="/">
+        <img src="./photo-club-icon.ico" alt="KFUPM Photo club icon">
+    </a>
+    <a href="/">
+        <span>
+            <h1>KFUPM</h1>
+            <h2>PHOTOCLUB</h2>
+        </span>
+    </a>
+    <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" width="46" height="38"
+        viewBox="0 0 46 38" fill="none">
+        <rect x="6" y="6" width="35" height="6" rx="3" fill="#E8E8E8" />
+        <rect x="6" y="16" width="35" height="6" rx="3" fill="#E8E8E8" />
+        <rect x="6" y="26" width="35" height="6" rx="3" fill="#E8E8E8" />
+    </svg>
+</div>
+<div class="menu" id="dropdownMenu" >
     <i id="xIcon" class="bi bi-x-circle-fill"></i>
     <i id="profileIcon" class="bi bi-person-circle"></i>
     <% if (userRole!="visitor") { %>
-        <span class="username">Hello, <%= userName %></span>
+    <h5 class="username">Hello, <%= userName %></h5>
     <% } else { %>
-        <a href="Login">Sign in</a>
+    <a href="Login">Sign in</a>
     <% } %>
     <a href="/">Home</a>
     <a href="covreges">covreges</a>
     <a href="events">Events</a>
     <a href="#">About Photo Club</a>
     <% if (userRole=="visitor") { %>
-        <a href="register">Join Photo Club</a>
+    <a href="register">Join Photo Club</a>
     <% } %>
     <% if (userRole!="visitor") { %>
     <form action="/logout" method="POST">
