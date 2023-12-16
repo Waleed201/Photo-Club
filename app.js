@@ -53,7 +53,7 @@ async function eee(str) {
     hashedPassword = await eee("member");
     users.push({
       id: Date.now().toString(),
-      name: "admin",
+      name: "member",
       email: "member@a",
       password: hashedPassword,
       role: 'member'
@@ -62,7 +62,7 @@ async function eee(str) {
     hashedPassword = await eee("club");
     users.push({
       id: Date.now().toString(),
-      name: "admin",
+      name: "club",
       email: "club@a",
       password: hashedPassword,
       role: 'club'
@@ -71,7 +71,7 @@ async function eee(str) {
     hashedPassword = await eee("user");
     users.push({
       id: Date.now().toString(),
-      name: "admin",
+      name: "user",
       email: "user@admin",
       password: hashedPassword,
       role: 'user'
