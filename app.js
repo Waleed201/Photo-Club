@@ -126,6 +126,13 @@ function checkNotAuthenticated(req, res, next) {
   next();
 }
 
+function checkNotAuthenticatedTest(req, res, next) {
+  if (req.isAuthenticated() && req.user.role != "admin" ) {
+    return res.redirect('/');
+  }
+  next();
+}
+
 
 // Route definitions
 app.get('/', (req, res) => {
@@ -149,7 +156,7 @@ app.get('/index1', (req, res) => {
 
 
 
-app.get('/register', checkNotAuthenticated, (req, res) => {
+app.get('/register', checkNotAuthenticatedTest, (req, res) => {
   const isAuthenticated = req.isAuthenticated();
   if (isAuthenticated){
     res.render('register', { userRole: req.user.role, userName: req.user.name });
