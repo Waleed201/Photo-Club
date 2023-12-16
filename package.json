@@ -5,8 +5,9 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js",
-    "start-flask": "Face_recognition/app.py"
+    "start": "concurrently \"npm run start-flask\" \"npm run start-node\"",
+    "start-flask": "python Face_recognition/app.py",
+    "start-node": "nodemon app.js"
 
   },
   "keywords": [],
