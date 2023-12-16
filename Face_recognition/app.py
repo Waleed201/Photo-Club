@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template,jsonify
 import FR  
+import os
 app = Flask(__name__)
 
 @app.route('/search', methods = ['POST']) 
@@ -17,5 +18,7 @@ def function():
         print(e)
         return "error"
 
-app.run(port=5000)
-
+port = int (os.environ.get("PORT",5000))
+host = '0.0.0.0' if os.environ.get('FLASK_ENV') == 'production' else 'localhost'
+if __name__ == '__main__':
+    app.run(host=host, port=port, debug=True)
