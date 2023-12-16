@@ -383,6 +383,12 @@ app.all('*', (req, res) => {
 });
 
 // Start the server
+require('dotenv').config(); // Add this line to load environment variables from .env file
 
-app.listen(process.env.PORT, () => 
-console.log(`Server running on port ${process.env.PORT}`));
+// ...
+
+const port = process.env.PORT || 3000; // Use the port from .env file or default to 3000
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
