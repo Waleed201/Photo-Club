@@ -130,16 +130,31 @@ function checkNotAuthenticated(req, res, next) {
 
 // Route definitions
 app.get('/', (req, res) => {
-  res.render('index');
+  const isAuthenticated = req.isAuthenticated();
+  if (isAuthenticated){
+    res.render('index', { userRole: req.user.role, userName: req.user.name });
+  } else {
+    res.render('index', { userRole: "visitor" });
+  }
 });
 
 app.get('/index1', (req, res) => {
   console.log("index111");
-  res.render('index1');
+  const isAuthenticated = req.isAuthenticated();
+  if (isAuthenticated){
+    res.render('index1', { userRole: req.user.role, userName: req.user.name });
+  } else {
+    res.render('index1', { userRole: "visitor" });
+  }
 });
 
 app.get('/register', checkNotAuthenticated, (req, res) => {
-  res.render('register');
+  const isAuthenticated = req.isAuthenticated();
+  if (isAuthenticated){
+    res.render('register', { userRole: req.user.role, userName: req.user.name });
+  } else {
+    res.render('register', { userRole: "visitor" });
+  }
 });
 
 app.post('/register', checkNotAuthenticated, async (req, res) => {
@@ -166,7 +181,12 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
 });
 
 app.get('/login', checkNotAuthenticated, (req, res) => {
-  res.render('login');
+  const isAuthenticated = req.isAuthenticated();
+  if (isAuthenticated){
+    res.render('login', { userRole: req.user.role, userName: req.user.name });
+  } else {
+    res.render('login', { userRole: "visitor" });
+  }
 });
 
 app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
@@ -193,6 +213,19 @@ let covrg = {
 };
 
 
+app.delete('/files/:name', (req, res) => {
+  const s3 = new AWS.S3(); // Create a new S3 instance
+  const deleteParams = { Bucket: BUCKETNAME, Key: req.params.name }; // Define parameters to delete the object
+  s3.deleteObject(deleteParams, (err) => { // Delete the specified object
+      if (err) {
+          console.log(err); // Log any errors to the console
+          res.status(500).send("Internal Server Error"); // Send a 500 error response on failure
+      } else {
+        console.log("dddddd")
+          res.send("File deleted successfully"); // Confirm deletion success
+      }
+  });
+});
 
 
 
@@ -212,32 +245,41 @@ app.get('/covrege', (req, res) => {
       const files = data.Contents.map(file => {
         const folderName = path.dirname(file.Key); // Fix the syntax error by changing 'file.key' to 'file.Key'
         const fileName = path.basename(file.Key); // Fix the syntax error by changing 'file.key' to 'file.Key'
-
+        var encodedFileName = encodeURIComponent(folderName+"/"+fileName);
         return {
           folder: folderName,
           name: fileName,
-          url: `https://${BUCKETNAME}.s3.amazonaws.com/${file.Key}`
+          url: `https://${BUCKETNAME}.s3.amazonaws.com/${file.Key}`,
+          encodedurl: encodedFileName
+
         };
       });
-      console.log(files);
-      
-      res.render('covrege', { files, covrg });
+      const isAuthenticated = req.isAuthenticated();
+      if (isAuthenticated){
+        res.render('covrege', { files, covrg, userRole: req.user.role, userName: req.user.name });
+      } else {
+        res.render('covrege', { files, covrg, userRole: "visitor" });
+      }
     }
   });
 });
 
 app.get('/covreges',  (req, res) => {
   const isAuthenticated = req.isAuthenticated();
-  console.log(isAuthenticated);
   if (isAuthenticated){
-    res.render('covreges', { userRole: req.user.role });
+    res.render('covreges', { userRole: req.user.role, userName: req.user.name });
   } else {
     res.render('covreges', { userRole: "visitor" });
   }
 });
 
 app.get('/events', (req, res) => {
-  res.render('events');
+  const isAuthenticated = req.isAuthenticated();
+  if (isAuthenticated){
+    res.render('events', { userRole: req.user.role, userName: req.user.name });
+  } else {
+    res.render('events', { userRole: "visitor" });
+  }
 });
 
 // AWS S3 File Operations Routes
@@ -276,17 +318,6 @@ app.post('/upload', upload.array('files'), (req, res) => {
     .catch(err => res.status(500).json({ error: 'Error -> ' + err }));
 });
 
-app.delete('/files/:name', (req, res) => {
-  const deleteParams = { Bucket: BUCKETNAME, Key: req.params.name };
-  s3.deleteObject(deleteParams, (err) => {
-    if (err) {
-      console.log(err);
-      res.status(500).send("Internal Server Error");
-    } else {
-      res.send("File deleted successfully");
-    }
-  });
-});
 
 // Error handling for undefined routes
 app.all('*', (req, res) => {
