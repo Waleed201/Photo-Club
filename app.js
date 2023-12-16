@@ -28,6 +28,7 @@ const s3 = new AWS.S3();
 function createS3Instance() {
   return new AWS.S3();
 }
+
 // Configure Multer for file uploads
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
@@ -114,19 +115,6 @@ app.use(express.static('./SWE363 Project/images'));
 app.use(express.static('./Face_recognition/your_script.by'))
 app.use(methodOverride('_method'));
 app.use(express.json());
-function checkAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect('/login');
-}
-
-function checkNotAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return res.redirect('/');
-  }
-  next();
-}
 
 
 // Route definitions

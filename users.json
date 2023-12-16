@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1702752400276",
+    "name": "admin",
+    "email": "admin@a",
+    "password": "$2b$10$Vz.1KHDvYlauXrylj.hwtuhgYW3Ow5fiULrer5IAVNc2rngXG3gmu",
+    "role": "admin"
+  },
+  {
+    "id": "1702752400366",
+    "name": "member",
+    "email": "member@a",
+    "password": "$2b$10$JRDjo9UqD0UvK7YmqemNgOEnzADE43ukwPRyGLonSmJYS2EGUeK7K",
+    "role": "member"
+  },
+  {
+    "id": "1702752400456",
+    "name": "club",
+    "email": "club@a",
+    "password": "$2b$10$NMdEH/01qxeQDAmDfHeCGu4ifR1qAcJw6WbWdp1GV1/vsTjtEelMu",
+    "role": "club"
+  },
+  {
+    "id": "1702752400546",
+    "name": "user",
+    "email": "user@admin",
+    "password": "$2b$10$8nEPBwlW.Uf4vHZ861Gau.lM/14V8lVkQMXoBXbIBu4tpTlKILlV2",
+    "role": "user"
+  }
+]
