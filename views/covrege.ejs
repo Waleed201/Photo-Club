@@ -40,7 +40,6 @@
       <p>
         <%= covrg.details %>
       </p>
-      <h1 id="output"></h1>
 
       <div class="gallery" id="gallery">
         <% files.forEach(function(file) { %>
@@ -58,7 +57,8 @@
           <% }); %>
       </div>
     </div>
-
+    
+    
     <div class="button-add-search">
       <form action="/upload" method="post" enctype="multipart/form-data" style="display: none;">
         <input required id="fileInput" type="file" name="files" multiple class="form-control" style="display: none;">
@@ -130,37 +130,65 @@ document.addEventListener('DOMContentLoaded', function () {
         }).then(response => {
           if (response.ok) {
             console.log('Files uploaded successfully');
+            return fetch('/search', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                  "folder": "<%= covrg.ceremonyTitle %>",
+                  "img": `searchTemp/${image.name}`
+              })
+          });
           } else {
             console.error('Upload failed');
           }
-        }).catch(err => console.error('Error:', err));
-
-
-      // search image
-      // Send a POST request to the server
-    
-      fetch('/search', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({"folder": "<%= covrg.ceremonyTitle %>",
-         "img":`searchTemp/${image.name}`})
-      })
-        .then(response => {
-          if (response.ok) {
-            console.log(response.json());
-            // Handle the response from the server
+        }).then(searchResponse => {
+          if (searchResponse.ok) {
+              return searchResponse.json();
           } else {
-            console.error('Search request failed');
+              console.error('Search request failed');
           }
-        })
-        .catch(err => console.error('Error:', err));
+      }).then(data => {
+          const files = data.files;
+          console.log('received files:',data);
+          updateGallery(files); // Update the gallery with the search results
+      }).catch(err => console.error('Error:', err));
 
       }
       
     });
     })
+
+
+    function updateGallery(files) {
+      // Clear existing content in the gallery
+      var gallery = document.getElementById('gallery');
+      gallery.innerHTML = '';
+  
+      // Iterate through the files and append images to the gallery
+      files.forEach(function (file) {
+          var photoDiv = document.createElement('div');
+          photoDiv.className = 'photo';
+  
+          var img = document.createElement('img');
+          img.src = file.url;
+          img.alt = '---';
+  
+          var span = document.createElement('span');
+          span.innerHTML = `
+              <i class="bi bi-cloud-download downloadIcon"></i>
+              <i class="bi bi-eye eyeIcon"></i>
+              <i class="bi bi-trash3 deleteIcon" data-name="${file.encodedurl}"></i>
+          `;
+  
+          photoDiv.appendChild(img);
+          photoDiv.appendChild(span);
+  
+          gallery.appendChild(photoDiv);
+      });
+  }
+  
 // upload images
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('addButton').addEventListener('click', function () {

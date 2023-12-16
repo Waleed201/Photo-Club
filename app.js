@@ -230,6 +230,41 @@ app.delete('/files/:name', (req, res) => {
 
 
 
+app.post('/search', async (req, res) => {
+  console.log("in search");
+  try {
+    let imgName = req.body.img;
+    let folder = req.body.folder;
+
+    const respons = await axios.post('http://127.0.0.1:5000/search', { folder, imgName });
+    const files = respons.data.map(file => {
+
+      const folderName = file.split("/")[0];; 
+      const fileName = file.split("/")[1]; 
+      return {
+        folder: folderName,
+        name: fileName,
+        url: `https://${BUCKETNAME}.s3.amazonaws.com/${folderName}/${fileName}`
+      };
+    });
+    console.log("files: ----------------------------");
+    console.log(files);
+    res.json({files});
+    // const isAuthenticated = req.isAuthenticated();
+    //   if (isAuthenticated){
+    //     console.log("done search");
+    //     res.render('covrege', { files, covrg, userRole: req.user.role });
+    //   } else {
+    //     console.log("done search");
+    //     res.render('covrege', { files, covrg, userRole: "visitor"});
+    //   }
+    // res.render('covrege', { files, covrg });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+    res.redirect('/covrege');
+  }
+});
 
 
 
@@ -272,6 +307,7 @@ app.get('/covreges',  (req, res) => {
   } else {
     res.render('covreges', { userRole: "visitor" });
   }
+
 });
 
 app.get('/events', (req, res) => {
@@ -320,39 +356,6 @@ app.post('/upload', upload.array('files'), (req, res) => {
 });
 
 
-
-app.post('/search', async (req, res) => {
-  console.log("in search");
-  try {
-    let imgName = req.body.img;
-    let folder = req.body.folder;
-    const respons = await axios.post('http://127.0.0.1:5000/search', { folder, imgName });
-    console.log("respons: -----------------------------");
-    console.log(respons.data);
-    const files = respons.data.map(file => {
-
-      const folderName = file.split("/")[0];; 
-      const fileName = file.split("/")[1]; 
-      return {
-        folder: folderName,
-        name: fileName,
-        url: `https://${BUCKETNAME}.s3.amazonaws.com/${folderName}/${fileName}`
-      };
-    });
-    console.log("files: -----------------------------");
-    console.log(files);
-    const isAuthenticated = req.isAuthenticated();
-      if (isAuthenticated){
-        res.render('covrege', { files, covrg, userRole: req.user.role });
-      } else {
-        res.render('covrege', { files, covrg, userRole: "visitor"});
-      }
-    // res.render('covrege', { files, covrg });
-  } catch (error) {
-    console.error(error);
-    res.redirect('/covrege');
-  }
-});
 
 // Error handling for undefined routes
 app.all('*', (req, res) => {
