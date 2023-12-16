@@ -91,22 +91,23 @@
     <main>
         <section class="cardsContainer">
             <h1>Coverages</h1>
-            <% console.log(folders) %>
 
             <% folders.forEach(function(folder) { %>
+                <% if (folder != "searchTemp"){ %>
                 <div class="cont">
-                  <div class="coverageCard">
-                    <% console.log(files) %>
-                    <% files.filter(file => file.folder === folder).forEach(function(file) { %>
-                        <% if (file.folder === folder) { %>
-                            <img src="<%= file.url %>" alt="">
-                            <p class="cardTitle"><%= folder %></p>
-                        <% } %>
-                    <% }); %>
-                  </div>
+                    <div class="coverageCard">
+                        <% let num = 1 %>
+                        <% files.forEach(function(file) { %>
+                            <% if (folder === file.folder && num != 2) { %>
+                                    <img  src="<%= file.url %>" alt="">
+                                    <p class="cardTitle"><%= folder %></p>
+                                <% num += 1 %>
+                            <% } %>
+                        <% }); %>                        
+                    </div>
                 </div>
-              <% }); %>
-              
+                <% } %>
+            <% }); %>
 
 
         </section>
@@ -140,7 +141,9 @@
         cvCard = document.querySelectorAll(".coverageCard");
         cvCard.forEach(element => {
             element.addEventListener('click', function () {
-                window.location.href = 'covrege'
+            var folderText = this.querySelector('.cardTitle').innerHTML;
+            window.location.href = 'coverage?folder=' + folderText;
+
             });
         })
 

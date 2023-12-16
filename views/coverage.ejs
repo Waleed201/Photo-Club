@@ -16,9 +16,7 @@
 
   
 
-  <title>
-    <%= covrg.ceremonyTitle %>
-  </title>
+  <title><%= covrg %></title>
 
 </head>
 
@@ -31,19 +29,19 @@
   </header>
 
   <main>
-    
+
     
     <div class="covregeContaner">
       <h3>
-        <%= covrg.ceremonyTitle %>
+        <%= covrg %>
       </h3>
-      <p>
-        <%= covrg.details %>
-      </p>
+      
 
       <div class="gallery" id="gallery">
         <% files.forEach(function(file) { %>
-          <% if(file.folder == covrg.ceremonyTitle) { %>
+          <% if(file.folder === covrg) { %>
+            
+
           <div class="photo">
             <img src="<%= file.url %>" alt="---">
             <span>
@@ -62,7 +60,7 @@
     <div class="button-add-search">
       <form action="/upload" method="post" enctype="multipart/form-data" style="display: none;">
         <input required id="fileInput" type="file" name="files" multiple class="form-control" style="display: none;">
-        <input required type="text" name="folder" placeholder="folder name" class="form-control" value="<%= covrg.ceremonyTitle %>">
+        <input required type="text" name="folder" placeholder="folder name" class="form-control" value="<%= covrg %>">
       </form>
 
       <form action="/search" method="post" enctype="multipart/form-data" style="display: none;">
@@ -136,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function () {
                   'Content-Type': 'application/json'
               },
               body: JSON.stringify({
-                  "folder": "<%= covrg.ceremonyTitle %>",
+                  "folder": "<%= covrg %>",
                   "img": `searchTemp/${image.name}`
               })
           });
@@ -202,7 +200,7 @@ document.addEventListener('DOMContentLoaded', function () {
             for (var i = 0; i < files.length; i++) {
                 formData.append('files', files[i]);
             }
-            formData.append('folder', '<%= covrg.ceremonyTitle %>'); // Set folder name
+            formData.append('folder', '<%= covrg %>'); // Set folder name
 
             // Make an AJAX request to the server
             fetch('/upload', {
@@ -251,19 +249,19 @@ function attachDeleteHandlers() {
       console.log("enter delete handler");
         var fileName = $(this).data('name'); // Get the file name stored in the data-name attribute.
         if(confirm("Are you sure you want to delete the file " + fileName + "?")){ // Show a confirmation dialog.
-            deleteFile(fileName) // If confirmed, call the deleteFile function with the file name.
+            deleteFile(fileName) 
+// If confirmed, call the deleteFile function with the file name.
         }
+    window.location.reload(); // Reload the page after successful upload
+
     });
+
 }
 
 
 // Defines the deleteFile function.
 function deleteFile(fileName) {
   console.log("enter delete file");
-  
-  // Encode the file name to handle special characters and spaces
-  // var encodedFileName = encodeURIComponent(fileName);
-
   // Send an AJAX DELETE request to the '/files/[fileName]' URL.
   $.ajax({
       url: '/files/' + fileName,
