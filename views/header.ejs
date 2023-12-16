@@ -15,11 +15,18 @@
 <div class="menu" id="dropdownMenu" style="width: 400px;">
     <i id="xIcon" class="bi bi-x-circle-fill"></i>
     <i id="profileIcon" class="bi bi-person-circle"></i>
+    <% if (userRole!="visitor") { %>
+        <span class="username">Hello, <%= userName %></span>
+    <% } else { %>
+        <a href="Login">Sign in</a>
+    <% } %>
     <a href="/">Home</a>
     <a href="covreges">covreges</a>
     <a href="events">Events</a>
     <a href="#">About Photo Club</a>
-    <a href="register">Join Photo Club</a>
+    <% if (userRole=="visitor") { %>
+        <a href="register">Join Photo Club</a>
+    <% } %>
     <% if (userRole!="visitor") { %>
     <form action="/logout" method="POST">
         <button type="submit" class="btn btn-outline-light">Logout</button>

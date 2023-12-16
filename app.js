@@ -132,7 +132,7 @@ function checkNotAuthenticated(req, res, next) {
 app.get('/', (req, res) => {
   const isAuthenticated = req.isAuthenticated();
   if (isAuthenticated){
-    res.render('index', { userRole: req.user.role });
+    res.render('index', { userRole: req.user.role, userName: req.user.name });
   } else {
     res.render('index', { userRole: "visitor" });
   }
@@ -142,7 +142,7 @@ app.get('/index1', (req, res) => {
   console.log("index111");
   const isAuthenticated = req.isAuthenticated();
   if (isAuthenticated){
-    res.render('index1', { userRole: req.user.role });
+    res.render('index1', { userRole: req.user.role, userName: req.user.name });
   } else {
     res.render('index1', { userRole: "visitor" });
   }
@@ -151,7 +151,7 @@ app.get('/index1', (req, res) => {
 app.get('/register', checkNotAuthenticated, (req, res) => {
   const isAuthenticated = req.isAuthenticated();
   if (isAuthenticated){
-    res.render('register', { userRole: req.user.role });
+    res.render('register', { userRole: req.user.role, userName: req.user.name });
   } else {
     res.render('register', { userRole: "visitor" });
   }
@@ -183,7 +183,7 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
 app.get('/login', checkNotAuthenticated, (req, res) => {
   const isAuthenticated = req.isAuthenticated();
   if (isAuthenticated){
-    res.render('login', { userRole: req.user.role });
+    res.render('login', { userRole: req.user.role, userName: req.user.name });
   } else {
     res.render('login', { userRole: "visitor" });
   }
@@ -256,7 +256,7 @@ app.get('/covrege', (req, res) => {
       });
       const isAuthenticated = req.isAuthenticated();
       if (isAuthenticated){
-        res.render('covrege', { files, covrg, userRole: req.user.role });
+        res.render('covrege', { files, covrg, userRole: req.user.role, userName: req.user.name });
       } else {
         res.render('covrege', { files, covrg, userRole: "visitor" });
       }
@@ -267,7 +267,7 @@ app.get('/covrege', (req, res) => {
 app.get('/covreges',  (req, res) => {
   const isAuthenticated = req.isAuthenticated();
   if (isAuthenticated){
-    res.render('covreges', { userRole: req.user.role });
+    res.render('covreges', { userRole: req.user.role, userName: req.user.name });
   } else {
     res.render('covreges', { userRole: "visitor" });
   }
@@ -276,7 +276,7 @@ app.get('/covreges',  (req, res) => {
 app.get('/events', (req, res) => {
   const isAuthenticated = req.isAuthenticated();
   if (isAuthenticated){
-    res.render('events', { userRole: req.user.role });
+    res.render('events', { userRole: req.user.role, userName: req.user.name });
   } else {
     res.render('events', { userRole: "visitor" });
   }
