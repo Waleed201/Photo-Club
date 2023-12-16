@@ -213,6 +213,19 @@ let covrg = {
 };
 
 
+app.delete('/files/:name', (req, res) => {
+  const s3 = new AWS.S3(); // Create a new S3 instance
+  const deleteParams = { Bucket: BUCKETNAME, Key: req.params.name }; // Define parameters to delete the object
+  s3.deleteObject(deleteParams, (err) => { // Delete the specified object
+      if (err) {
+          console.log(err); // Log any errors to the console
+          res.status(500).send("Internal Server Error"); // Send a 500 error response on failure
+      } else {
+        console.log("dddddd")
+          res.send("File deleted successfully"); // Confirm deletion success
+      }
+  });
+});
 
 
 
@@ -232,11 +245,13 @@ app.get('/covrege', (req, res) => {
       const files = data.Contents.map(file => {
         const folderName = path.dirname(file.Key); // Fix the syntax error by changing 'file.key' to 'file.Key'
         const fileName = path.basename(file.Key); // Fix the syntax error by changing 'file.key' to 'file.Key'
-
+        var encodedFileName = encodeURIComponent(folderName+"/"+fileName);
         return {
           folder: folderName,
           name: fileName,
-          url: `https://${BUCKETNAME}.s3.amazonaws.com/${file.Key}`
+          url: `https://${BUCKETNAME}.s3.amazonaws.com/${file.Key}`,
+          encodedurl: encodedFileName
+
         };
       });
       const isAuthenticated = req.isAuthenticated();
@@ -303,17 +318,6 @@ app.post('/upload', upload.array('files'), (req, res) => {
     .catch(err => res.status(500).json({ error: 'Error -> ' + err }));
 });
 
-app.delete('/files/:name', (req, res) => {
-  const deleteParams = { Bucket: BUCKETNAME, Key: req.params.name };
-  s3.deleteObject(deleteParams, (err) => {
-    if (err) {
-      console.log(err);
-      res.status(500).send("Internal Server Error");
-    } else {
-      res.send("File deleted successfully");
-    }
-  });
-});
 
 // Error handling for undefined routes
 app.all('*', (req, res) => {
