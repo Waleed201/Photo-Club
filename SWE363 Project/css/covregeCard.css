@@ -1,13 +1,16 @@
 .cardsContainer{
-    display: flex;
     flex-direction: column;
-    gap: 35px;
+    gap: 10px;
 }
 
 .cardsContainer > div {
     padding: 10px;
     background-color: #1e1e1e;
     border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
 }
 
 .cardsContainer h1 {
@@ -18,7 +21,9 @@
 .coverageCard {
     width: 365px;
     height: 269px;
-    flex-shrink: 0;
+    flex: 1 1 0px;
+    min-width: 365px;
+    max-width: 400px;
     background-color: #222222;
     border-radius: 18px;
     border: 1px solid black;

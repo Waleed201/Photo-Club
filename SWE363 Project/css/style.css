@@ -156,7 +156,7 @@ section {
     margin: 10px 10%;
 }
 
-section>div {
+section > div {
     display: flex;
     flex-direction: column;
     gap: 16px;
