@@ -1,7 +1,7 @@
 {
   "name": "swe363-project",
   "version": "1.0.0",
-  "description": "",
+  "description": "The main goal of this web application is to help PhotoClub with their work of uploading and sharing of their photos and events. Also, the application will make the process of searching for specific photos much easier. Furthermore, the application will have a special space for photographers to share their creativity and their experiences.",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "^2.1515.0",
+    "axios": "^1.6.2",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.3.1",
     "ejs": "^3.1.9",
