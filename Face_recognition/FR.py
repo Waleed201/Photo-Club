@@ -24,7 +24,7 @@ s3 = boto3.client(
     config=Config(signature_version='s3v4')
 )
 
-def search_faces(bucket_name = 'photo-club-s3', folder_name='sampleImages', face_to_find_key =''):
+def search_faces( folder_name, face_to_find_key,bucket_name = 'photo-club-s3'):
     # Download the reference image from S3
     file_stream = io.BytesIO()
     s3.download_fileobj(Bucket=bucket_name, Key=face_to_find_key, Fileobj=file_stream)
@@ -58,18 +58,6 @@ def search_faces(bucket_name = 'photo-club-s3', folder_name='sampleImages', face
     return found_faces
 
 # Example usage
-bucket_name = 'photo-club-s3'
-folder_name = 'sampleImages'
-face_image_key = 'sampleImages/mansOFF.jpg'  # S3 key for the reference image
+# matching_images = search_faces( face_to_find_key = 'sampleImages/mansOFF.jpg')
 
-
-# Display the dialog for browsing files.
-filename = filedialog.askopenfilename()
-# Print the selected file path.
-print(filename)
-
-
-
-matching_images = search_faces(bucket_name, folder_name, face_image_key)
-
-print(matching_images)
+# print(matching_images)
