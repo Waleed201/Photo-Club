@@ -58,6 +58,6 @@ def search_faces( folder_name, face_to_find_key,bucket_name = 'photo-club-s3'):
     return found_faces
 
 # Example usage
-# matching_images = search_faces( face_to_find_key = 'sampleImages/mansOFF.jpg')
+# matching_images = search_faces (folder_name = 'KFUPM Expo 2023',face_to_find_key = 'sampleImages/mansOFF.jpg')
 
 # print(matching_images)
