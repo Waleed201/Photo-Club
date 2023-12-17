@@ -54,7 +54,7 @@ async function eee(str) {
     hashedPassword = await eee("member");
     users.push({
       id: Date.now().toString(),
-      name: "admin",
+      name: "member",
       email: "member@a",
       password: hashedPassword,
       role: 'member'
@@ -63,7 +63,7 @@ async function eee(str) {
     hashedPassword = await eee("club");
     users.push({
       id: Date.now().toString(),
-      name: "admin",
+      name: "club",
       email: "club@a",
       password: hashedPassword,
       role: 'club'
@@ -72,7 +72,7 @@ async function eee(str) {
     hashedPassword = await eee("user");
     users.push({
       id: Date.now().toString(),
-      name: "admin",
+      name: "user",
       email: "user@admin",
       password: hashedPassword,
       role: 'user'
@@ -371,6 +371,12 @@ app.all('*', (req, res) => {
 });
 
 // Start the server
-app.listen(3000, () => {
-  console.log('Server is listening on port 3000...');
+require('dotenv').config(); // Add this line to load environment variables from .env file
+
+// ...
+
+const port = process.env.PORT || 3000; // Use the port from .env file or default to 3000
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });

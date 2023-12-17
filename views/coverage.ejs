@@ -47,8 +47,9 @@
             <span>
               <i class="bi bi-cloud-download downloadIcon"></i>
               <i class="bi bi-eye eyeIcon"></i>
-              <i class="bi bi-trash3 deleteIcon" data-name="<%= file.encodedurl %>"></i>
-
+              <% if (userRole == "admin") { %>
+                <i class="bi bi-trash3 deleteIcon" data-name="<%= file.encodedurl %>"></i>
+              <% } %>
             </span>
           </div>
           <% } %>

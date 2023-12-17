@@ -3,7 +3,7 @@
     gap: 10px;
 }
 
-.cardsContainer > div {
+.cardsContainer > .cont {
     padding: 10px;
     background-color: #141414;
     border-radius: 15px;

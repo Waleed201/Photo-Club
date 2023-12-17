@@ -91,10 +91,9 @@
     <main>
         <section class="cardsContainer">
             <h1>Coverages</h1>
-
+            <div class="cont">
             <% folders.forEach(function(folder) { %>
                 <% if (folder != "searchTemp"){ %>
-                <div class="cont">
                     <div class="coverageCard">
                         <% let num = 1 %>
                         <% files.forEach(function(file) { %>
@@ -105,9 +104,9 @@
                             <% } %>
                         <% }); %>                        
                     </div>
-                </div>
                 <% } %>
             <% }); %>
+        </div>
 
 
         </section>
