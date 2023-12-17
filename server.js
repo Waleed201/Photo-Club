@@ -10,6 +10,7 @@ const AWS = require('aws-sdk');
 const axios = require('axios');
 const { initializePassport, checkAuthenticated, checkNotAuthenticatedTest, checkNotAuthenticated } = require('./utils');
 const userData = require('./userData');
+const eventData = require('./eventData');
 
 
 const app = express();
@@ -34,6 +35,7 @@ const upload = multer({ storage });
 
 // User array and other initializations
 let users;
+let events;
 
 // Define your helper functions
 
@@ -41,6 +43,7 @@ let users;
 
 (async () => {
     users = await userData.loadUsers();
+    events = eventData.loadEvents();
 })();
 
 
@@ -268,17 +271,21 @@ app.post('/search', async (req, res) => {
         }
     });
 });
-
+///////////////////////////
 
 
 app.get('/events', (req, res) => {
     const isAuthenticated = req.isAuthenticated();
     if (isAuthenticated) {
-        res.render('events', { userRole: req.user.role, userName: req.user.name });
+        res.render('events', { userRole: req.user.role, userName: req.user.name , events: events});
     } else {
-        res.render('events', { userRole: "visitor" });
+        res.render('events', { userRole: "visitor" , events: events});
     }
 });
+
+
+
+////////////////////////
 
 
 // AWS S3 File Operations Routes

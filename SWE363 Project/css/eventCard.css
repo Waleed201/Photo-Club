@@ -1,6 +1,9 @@
 .eventCard {
     width: 365px;
-    height: fit-content;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     flex-shrink: 0;
     background-color: #222222;
     color: #E8E8E8;
@@ -44,6 +47,11 @@
     font-weight: 400;
     line-height: normal;
     opacity: 0.67;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: auto;
+  
 }
 
 
@@ -52,6 +60,7 @@
 .eventCard .cardDetails {
     display: flex;
     justify-content: space-between;
+    margin-top: auto;
 
 }
 
