@@ -2,12 +2,12 @@
   "name": "swe363-project",
   "version": "1.0.0",
   "description": "The main goal of this web application is to help PhotoClub with their work of uploading and sharing of their photos and events. Also, the application will make the process of searching for specific photos much easier. Furthermore, the application will have a special space for photographers to share their creativity and their experiences.",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently \"npm run start-flask\" \"npm run start-node\"",
     "start-flask": "python Face_recognition/app.py",
-    "start-node": "nodemon app.js"
+    "start-node": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
