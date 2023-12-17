@@ -109,7 +109,7 @@ app.get('/register', checkNotAuthenticatedTest, (req, res) => {
 });
 
 
-app.post('/register', checkNotAuthenticated, async (req, res) => {
+app.post('/register', checkNotAuthenticatedTest, async (req, res) => {
     try {
       const user = getUserByEmail(req.body.email);
       if (user) {

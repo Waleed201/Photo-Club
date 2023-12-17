@@ -30,55 +30,15 @@
     <a href="register">Join Photo Club</a>
     <% } %>
     <% if (userRole!="visitor") { %>
+        <% if(userRole=="admin"){ %>
+        <a href="register">Add acconet</a>
+        <% } %>
     <form action="/logout" method="POST">
         <button type="submit" class="btn btn-outline-light">Logout</button>
     </form>
     <% } %>
 </div>
 
-<% if (userRole == "admin") {  %>
-
-<div class="loginContainer" >
-    <form action="/register" method="POST" class="login-form">
-        <h2>Register</h2>
-
-        <div>
-            <label for="name">Name</label> 
-            <br>
-            <input type="text" id="name" name="name" required>
-        </div>
-
-        <div>
-            <label for="email">Email</label> 
-            <br>
-            <input type="email" id="email" name="email" required>
-        </div>
-
-        <div>
-            <label for="password">Password</label> 
-            <br>
-            <input type="password" id="password" name="password" required>
-        </div>
-
-
-        <div>
-            <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" checked>
-            <label class="btn btn-secondary" for="option1">Club</label>
-            
-            <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off">
-            <label class="btn btn-secondary" for="option2">Member</label>
-
-            <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off">
-            <label class="btn btn-secondary" for="option2">Admin</label>
-
-        </div>
-
-        
-        <button type="submit">Register</button>
-    </form>
-    <a href="/login">Login</a>
-</div>
-<% } %>
 
 
 

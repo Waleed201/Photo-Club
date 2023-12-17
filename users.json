@@ -58,5 +58,25 @@
       "visitor",
       ""
     ]
+  },
+  {
+    "id": "1702834468373",
+    "name": "ISEclub",
+    "email": "iseclub@kfupm",
+    "password": "$2b$10$bErCvHAFj8pzd25MQIthGOQQ.JRz6M3C2Ifx0MrEbiKUscBHOm/2a",
+    "role": [
+      "on",
+      ""
+    ]
+  },
+  {
+    "id": "1702834690136",
+    "name": "COEclub",
+    "email": "COEclub@kfupm",
+    "password": "$2b$10$PghG.GME/f06uFIhNaCFBuCv/g5F03/GyWvwY67p3iQ3rov5Znkki",
+    "role": [
+      "club",
+      ""
+    ]
   }
 ]

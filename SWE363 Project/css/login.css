@@ -71,12 +71,11 @@ main {
     padding: 2px 5px;
 }
 
-.login-form div input {
+.login-form div input:not([type="radio"]) {
     width: 100%;
     height: 59.667px;
     flex-shrink: 0;
     color: #E8E8E8;
-
     border-radius: 7px;
     background: #141414;
     border-radius: 14px;
