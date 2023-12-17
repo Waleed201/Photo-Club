@@ -44,12 +44,12 @@
             width: 50%;
             background-color: black;
             z-index: 2;
-            position: fixed;
+            position: absolute;
             left: 0;
             right: 0;
             margin-left: auto;
             margin-right: auto;
-            margin-top: 20%;
+            margin-top: 5%;
             /* Need a specific value to work */
 
         }
@@ -80,9 +80,9 @@
                 <br>
                 <input required type="text" name="folder" placeholder="folder name" class="form-control" >
             </div>
-            <label for="imagesFiles">Add Images</label>
+            <label for="imagesFiles" style="font-size: 20px;color: #6b6b6b;">Add Images</label>
             <br>
-            <input required id="fileInput" type="file" name="files" multiple class="form-control" >
+            <input required id="fileInput" type="file" name="files" multiple class="form-control">
             <button type="submit">Submit</button>
         </form>
     </div>
