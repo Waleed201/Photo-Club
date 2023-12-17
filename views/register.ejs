@@ -21,64 +21,67 @@
     </header>
     <main>
         <% if (messages.error) { %>
-            <div id="error-message" class="errorMessage"><%= messages.error %></div> 
-        <% } %>
+            <div id="error-message" class="errorMessage">
+                <%= messages.error %>
+            </div>
+            <% } %>
 
-        <div class="loginContainer">
-            <form action="/register" method="POST" class="login-form">
-                <h2>Register</h2>
+                <div class="loginContainer">
+                    <form action="/register" method="POST" class="login-form">
+                        <h2>Register</h2>
 
-                <div>
-                    <label for="name">Name</label> 
-                    <br>
-                    <input type="text" id="name" name="name" required>
+                        <div>
+                            <label for="name">Name</label>
+                            <br>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+
+                        <div>
+                            <label for="email">Email</label>
+                            <br>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div>
+                            <label for="password">Password</label>
+                            <br>
+                            <input type="password" id="password" name="password" required>
+                        </div>
+
+                        <% if (userRole=="admin" ) { %>
+
+                            <div style="display: none;">
+                                <input type="radio" class="btn-check" name="role" id="option1" autocomplete="off" checked>
+                                <label class="btn btn-secondary" for="option1">Club</label>
+
+                                <input type="radio" class="btn-check" name="role" id="option2" autocomplete="off">
+                                <label class="btn btn-secondary" for="option2">Member</label>
+
+                                <input type="radio" class="btn-check" name="role" id="option3" autocomplete="off">
+                                <label class="btn btn-secondary" for="option3">Admin</label>
+
+                            </div>
+                            <% } else { %>
+                                <input type="text" style="display: none;" name="role" value="visitor" autocomplete="off" >
+                            <% } %>
+                            <button type="submit" name="role">Register</button>
+
+                    </form>
+                    <a href="/login">Login</a>
                 </div>
-
-                <div>
-                    <label for="email">Email</label> 
-                    <br>
-                    <input type="email" id="email" name="email" required>
-                </div>
-
-                <div>
-                    <label for="password">Password</label> 
-                    <br>
-                    <input type="password" id="password" name="password" required>
-                </div>
-
-                <% if (userRole == "admin") {  %>
-
-                <div>
-                    <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" checked>
-                    <label class="btn btn-secondary" for="option1">Club</label>
-                    
-                    <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off">
-                    <label class="btn btn-secondary" for="option2">Member</label>
-
-                    <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off">
-                    <label class="btn btn-secondary" for="option2">Admin</label>
-
-                </div>
-                <% } %>
-
-                
-                <button type="submit">Register</button>
-            </form>
-            <a href="/login">Login</a>
-        </div>
     </main>
     <script>            // Wait for the DOM to be fully loaded
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Check if the element exists
             var errorMessage = document.getElementById('error-message');
             if (errorMessage) {
                 // Set a timeout to hide the message after 3 seconds (3000 milliseconds)
-                setTimeout(function() {
+                setTimeout(function () {
                     errorMessage.style.display = 'none';
                 }, 3000);
             }
         });
-</script>
+    </script>
 </body>
 
 </html>

@@ -26,5 +26,37 @@
     "email": "user@admin",
     "password": "$2b$10$8nEPBwlW.Uf4vHZ861Gau.lM/14V8lVkQMXoBXbIBu4tpTlKILlV2",
     "role": "user"
+  },
+  {
+    "id": "1702770193452",
+    "name": "Waleed",
+    "email": "aannsq23@gmail.com",
+    "password": "$2b$10$GR.bAlhinlydJ0HyHvhILOIk0KgIHPi10wNdvKeJgRkOcLDXJ6.aK"
+  },
+  {
+    "id": "1702771009040",
+    "name": "Khaleed",
+    "email": "kk3@gmail.com",
+    "password": "$2b$10$LoCy/DdfP2HQxqpgtNNmTORT5M.nEOKrTXTSwNKgMJyab3v.eC8W2"
+  },
+  {
+    "id": "1702771888270",
+    "name": "moon",
+    "email": "moon@m",
+    "password": "$2b$10$6HgxDlYlZDR5U3.uFXfZFOTC2A1bckeYA.HhYXdTaw4mj6VfnFJaC",
+    "role": [
+      "visitor",
+      ""
+    ]
+  },
+  {
+    "id": "1702772089520",
+    "name": "w",
+    "email": "Waleed@w",
+    "password": "$2b$10$M3J1hlOxUbQ7Ednkfu9YEeh4xm2arJrFchbbGqOHsvs.XTvH2a7gq",
+    "role": [
+      "visitor",
+      ""
+    ]
   }
 ]

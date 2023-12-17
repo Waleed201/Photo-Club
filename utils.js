@@ -42,6 +42,15 @@ function checkAuthenticated(req, res, next) {
   res.redirect('/login');
 }
 
+
+function checkNotAuthenticatedTest(req, res, next) {
+  if (req.isAuthenticated() && req.user.role != "admin" ) {
+    return res.redirect('/');
+  }
+  next();
+}
+
+
 function checkNotAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return res.redirect('/');
@@ -52,6 +61,8 @@ function checkNotAuthenticated(req, res, next) {
 module.exports = {
   initializePassport,
   checkAuthenticated,
+  checkNotAuthenticatedTest,
   checkNotAuthenticated,
   upload
 };
+        
