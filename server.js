@@ -253,10 +253,13 @@ app.post('/search', async (req, res) => {
                 .map(file => {
                     const folderName = path.dirname(file.Key);
                     const fileName = path.basename(file.Key);
+                    const encodedFileName = encodeURIComponent(folderName + "/" + fileName);
+
                     return {
                         folder: folderName,
                         name: fileName,
-                        url: `https://${BUCKETNAME}.s3.amazonaws.com/${file.Key}`
+                        url: `https://${BUCKETNAME}.s3.amazonaws.com/${file.Key}`,
+                        encodedurl: encodedFileName
                     };
                 });
 
