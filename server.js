@@ -84,9 +84,9 @@ app.use(express.json());
 app.get('/', (req, res) => {
     const isAuthenticated = req.isAuthenticated();
     if (isAuthenticated) {
-        res.render('index', { userRole: req.user.role, userName: req.user.name });
+        res.render('index1', { userRole: req.user.role, userName: req.user.name });
     } else {
-        res.render('index', { userRole: "visitor" });
+        res.render('index1', { userRole: "visitor" });
     }
 });
 
