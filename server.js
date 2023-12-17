@@ -84,9 +84,9 @@ app.use(express.json());
 app.get('/', (req, res) => {
     const isAuthenticated = req.isAuthenticated();
     if (isAuthenticated) {
-        res.render('index', { userRole: req.user.role, userName: req.user.name });
+        res.render('index1', { userRole: req.user.role, userName: req.user.name });
     } else {
-        res.render('index', { userRole: "visitor" });
+        res.render('index1', { userRole: "visitor" });
     }
 });
 
@@ -155,15 +155,7 @@ app.post('/logout', function (req, res, next) {
     });
 });
 
-// Coverage Route
-// let covrg = {
-//     ceremonyTitle: "Ceremony honoring club presidents",
-//     details: "Short course in portrait photography by Mr. Mohammad Shabeb Don't miss this chance Note: \"your attend count with non academic activities\"",
-//     photos: [
-//         "https://lh3.googleusercontent.com/fife/AGXqzDnnPT8rp3D2B_ZpmI4LuyFnNsS_JpZ1Q1XEVsNMUK5hSn5BEELIHkiv9itleiE_wK_8UjwEDoiE69kf89J4N8dTBtDNNHSQCMUGH-8El8O_p1xjozu0r8shymerZmXDUsmcGmef4X3plkAwF6Bjm6uQk5_rToaGSi631_jC-W0aAfyPMK2T1mGf25J6ks6tupR62C_bG7wwCSN-_HTLD-DJxQ42JrZ9iuMm6Fx-iFNIFnSlhrCQ994iDtWQ3wJxvgmNPs8ICwccYsreRxwCn9JICSXzhp-zcdl2_QB52Bq-M6bqgGbgi2XCXzWvnfy35lxGERPzIta6VLpqN83OW27UySJlbPTZkT12AwU4YSYPRvqs17PtpYxg3CCgp_XH2dYlLbko5523tKdS19Sw9hjmGw8E0R1WtRrLJFV7tGGrtMMHZwBKTqeXTmFUt3p9-B2DvUbvdbMMLQYw7OLdMBQRu2UNQVoIRITtv1BhAaWOCvSFF_m5UC1QLVqB0cSX4Bxk_JaFTD3tedHypYAkbZuCnAACDuyW3HoNhTwbqutTKAVZoBWpuBwHo4g_rKmO4kOSkC8O2XBsMvIxADFcrHbnjtDuDajFhCqY3zrwtpHxYUTKh5FNQKpYSyqlrR-vEUeciYjcRju3xUdieT0E2oaoFtJLan_57zMfAiAJBJ2ZxQTEhwNRlGNSDxqfjRvecoWqx5fDtSacGlFRprCS23VWBHIGP1smCn_4KQjbVNooJy1aMiO40TYHSsxFhKb1ECkVQkptcjXdfSBlVFskiK-tFTzweP4-grEu92mcXvWifQAF5VxcirSQAMel5tgxtjaUie7Xhvx9PBQN0phEJQCEoJQJxUUR7c56VP23xTFnObARU-AAqj_74_RQO2M2I8JTEEekcZqWZehyzrHlZxVjcGGoew_5Lm7r4n-T8rlBL7w=w1194-h1470",
-//         "https://lh3.googleusercontent.com/fife/AGXqzDmT87diGBY96akkAyQxKrN0YeY1nemEXD5zI1Ji6wNHMYdN7OHbMFT3GM5kA_A1_-fALwCbG3jogjboXwuiPcOVyNPsNBbhA39t_Km8CmRJJ45SjpDuBa6vSIyjCWVQFT2W-DPm31zOZD4-XPXdiMSxP-0yVs6zpAMjj2I6E0A7O2YF9ozj1NSXkiAc66rRh36irggFrbTixbQPgPgEvhhNM9o0M5JJSQ3BDq2dqiIHm9KAxPQZIB9A3MIhppuXHr8Dz2nZIkutmtA8asevlJPufirImVLlsRqh2nKWKzcrTHN6L7lfir_2kK4ov96FUsct8viI8o4V0dRSM0XTbcm34OZWi8V83HDx16e3J3bD5UpW4icyuB8w1TtUi57ZjcXGQ08T3hFl2bEO8L-pQkbfrJeyG4A3Oq_xC4s4IL6NtnYlDvzRX12941-aD2SjRv4_7MkA4OdCriNXOi0LeZf364TltBYiGXAtwwCuKqgm9wFMs9taQ3KRpktGEkB9rG9n9eaAX0HPxCWQneS8o66akN1td3wZ_YXebBpZObm1SXo182dbGVNGJCVQ3uR6rCm3HhIsjksYXeHBAeMg0aAQ4Ognx7dcmfHfhY_B60vR7t1_fqi7IpaansBgmBdemm5LZC2x3EnE2vdDNIKKecKZT0xg9eEtV9NSFfivhE4mIkTJ_AcAcZsUs6tXu-POsuo5VRSS-6Rnpp-cDjhlrkMLEckkxwOKxt5XPSQpH90Qti83gXjdLMQzcZBTioeg-kyUKoAksf1CX04RmaKJGa1k86Hfu2Ov5-2EKk_Hr-pL2XuuNmNdShSsSzHC_aM0BQUgHvOda5byfHaoh4ZHFcbNmzODADQUswgVbydbuwP6RdICGJ-v4vNK8FHBGUYvbupwJHlDVJYbTgeHmYNKPuMmk8fDE9OQQlBWpwVpf2-G-dA=w1194-h1470"
-//     ]
-// };
+
 
 
 app.delete('/files/:name', (req, res) => {
@@ -246,43 +238,37 @@ app.post('/search', async (req, res) => {
   app.get('/coverage', (req, res) => {
     const s3 = createS3Instance();
     const listParams = { Bucket: BUCKETNAME };
-    
+    const selectedFolder = req.query.folder; // Get the folder name from query parameter
+
     s3.listObjectsV2(listParams, (err, data) => {
-      if (err) {
-        console.log(err);
-        res.status(500).send("Internal Server Error");
-      } else {
-        const files = data.Contents.map(file => {
-          const folderName = path.dirname(file.Key);
-          const fileName = path.basename(file.Key);
-          var encodedFileName = encodeURIComponent(folderName + "/" + fileName);
-          return {
-            folder: folderName,
-            name: fileName,
-            url: `https://${BUCKETNAME}.s3.amazonaws.com/${file.Key}`,
-            encodedurl: encodedFileName
-          };
-        });
-        const isAuthenticated = req.isAuthenticated();
-        if (isAuthenticated) {
-          res.render('coverage', {
-            files,
-            covrg: req.query.folder,
-            userRole: req.user.role,
-            userName: req.user.name
-          });
+        if (err) {
+            console.log(err);
+            res.status(500).send("Internal Server Error");
         } else {
-          res.render('coverage', {
-            files,
-            covrg: req.query.folder,
-            userRole: "visitor",
-            userName: null
-            
-          });
+            const files = data.Contents
+                .filter(file => path.dirname(file.Key) === selectedFolder) // Filter by folder name
+                .map(file => {
+                    const folderName = path.dirname(file.Key);
+                    const fileName = path.basename(file.Key);
+                    return {
+                        folder: folderName,
+                        name: fileName,
+                        url: `https://${BUCKETNAME}.s3.amazonaws.com/${file.Key}`
+                    };
+                });
+
+            const isAuthenticated = req.isAuthenticated();
+            // Render the coverage.ejs template with the filtered files
+            res.render('coverage', {
+                files: files,
+                covrg: selectedFolder,
+                userRole: isAuthenticated ? req.user.role : "visitor",
+                userName: isAuthenticated ? req.user.name : null
+            });
         }
-      }
     });
-  });
+});
+
 
 
 app.get('/events', (req, res) => {
@@ -342,9 +328,6 @@ app.all('*', (req, res) => {
 
 require('dotenv').config(); // Add this line to load environment variables from .env file
 
-// Start the server
-app.listen(3000, () => {
-    console.log('Server is listening on port 3000...');
-});
-
+const port = process.env.PORT || 3001;
+app.listen(port, () => console.log(`Server is listening on port ${port}...`));
 module.exports = app;
