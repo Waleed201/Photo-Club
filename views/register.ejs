@@ -26,7 +26,7 @@
 
                 <div class="loginContainer">
                     <form action="/register" method="POST" class="login-form">
-                        <% if(userRole=="admin"){ %>
+                        <% if(typeof userRole !== 'undefined' && userRole=="admin"){ %>
                             <h2>Add account</h2>
                         <% } else { %>
                             <h2>Register</h2>
@@ -50,7 +50,7 @@
                             <input type="password" id="password" name="password" required>
                         </div>
 
-                        <% if (userRole=="admin" ) { %>
+                        <% if (typeof userRole !== 'undefined' && userRole=="admin" ) { %>
                             <div>
                               <input type="radio" class="btn-check" name="role" id="option1" value="club" autocomplete="off" checked>
                               <label class="btn btn-secondary" for="option1">Club</label>
