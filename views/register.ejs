@@ -26,7 +26,11 @@
 
                 <div class="loginContainer">
                     <form action="/register" method="POST" class="login-form">
-                        <h2>Register</h2>
+                        <% if(userRole=="admin"){ %>
+                            <h2>Add account</h2>
+                        <% } else { %>
+                            <h2>Register</h2>
+                        <% } %>
 
                         <div>
                             <label for="name">Name</label>
