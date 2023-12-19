@@ -4,8 +4,51 @@
 <head>
 
     <%- include('head') %>
-        <link rel="stylesheet" href="eventCard.css">
+        
+    <link rel="stylesheet" href="covrege.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="eventCard.css">
         <link rel="stylesheet" href="covregeCard.css">
+
+        <style>
+                    main {
+            display: block;
+        }
+
+        .submiter {
+            display: none;
+        }
+
+        .submationContaner {
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            background-color: black;
+            opacity: 0.7;
+            z-index: 2;
+        }
+
+        .SubmationForm {
+            min-height: 300px;
+            height: fit-content;
+            width: 50%;
+            background-color: black;
+            z-index: 2;
+            position: fixed;
+            left: 0;
+            right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 20%;
+            /* Need a specific value to work */
+
+        }
+
+        </style>
+
         <title>Events</title>
 </head>
 
@@ -15,6 +58,41 @@
         <%- include("header") %>
 
     </header>
+
+    <div class="submiter">
+        <div class="submationContaner"></div>
+        
+        <form action="/upload" method="POST" enctype="multipart/form-data" class="login-form SubmationForm">
+            <div>
+                <label for="title">Event Title:</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+    
+            <div>
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" rows="4" required></textarea>
+            </div>
+    
+            <div>
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+    
+            <div>
+                <label for="time">Time:</label>
+                <input type="time" id="time" name="time" required>
+            </div>
+    
+            <div>
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location" required>
+            </div>
+    
+            <button type="submit">Add Event</button>
+        </form>
+    </div>
+
+
 
     <main>
         <section class="cardsContainer">
@@ -63,13 +141,32 @@
 
 
             </div>
-
-
-
-
-
-
         </section>
+
+        <% if (userRole=="admin" ) { %>
+
+            <div class="button-add-search">
+                <button type="button" id="addButton" class="btn btn-outline-primary">Add</button>
+                <!-- <button type="button" class="btn btn-outline-secondary">Search</button> -->
+            </div>
+
+            <script>
+                const btnAdd = document.querySelector("#addButton");
+                const submiter = document.querySelector(".submiter");
+                const x_icon = document.querySelector(".bi-x")
+
+                btnAdd.addEventListener('click', function () {
+                    submiter.style.display = "block";
+                });
+
+                x_icon.addEventListener('click', function () {
+                    submiter.style.display = "none";
+                })
+
+            </script>
+
+        <% } %>
+
     </main>
 
 </body>
