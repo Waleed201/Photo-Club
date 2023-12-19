@@ -247,7 +247,8 @@ main {
 
     main {
         position: relative;
-        top: 130px;
+        padding-top: 20px;
+        
     }
     
   }

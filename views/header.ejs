@@ -18,7 +18,7 @@
 <div class="menu" id="dropdownMenu" >
     <i id="xIcon" class="bi bi-x-circle-fill"></i>
     <i id="profileIcon" class="bi bi-person-circle"></i>
-    <% if (userRole!="visitor") { %>
+    <% if (typeof userRole !== 'undefined' && userRole!="visitor") { %>
     <h5 class="username">Hello, <%= userName %></h5>
     <% } else { %>
     <a href="Login">Sign in</a>
@@ -26,12 +26,12 @@
     <a href="/">Home</a>
     <a href="coverages">coverages</a>
     <a href="events">Events</a>
-    <% if (userRole=="visitor") { %>
+    <% if (typeof userRole !== 'undefined' && userRole=="visitor") { %>
     <a href="register">Join Photo Club</a>
     <% } %>
-    <% if (userRole!="visitor") { %>
-        <% if(userRole=="admin"){ %>
-        <a href="register">Add acconet</a>
+    <% if (typeof userRole !== 'undefined' && userRole!="visitor") { %>
+        <% if(typeof userRole !== 'undefined' && userRole=="admin"){ %>
+        <a href="register">Add acoount</a>
         <% } %>
     <form action="/logout" method="POST">
         <button type="submit" class="btn btn-outline-light">Logout</button>

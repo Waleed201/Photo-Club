@@ -21,6 +21,8 @@
 </head>
 
 <body>
+  <div id="loaderContainer" class="loaderContainer"><div id="loader" class="pulsate-fwd"></div> </div>
+   
   <div id="bigdiv">
     <img src="" id="largeImage">
   </div>
@@ -29,8 +31,6 @@
   </header>
 
   <main>
-
-    
     <div class="covregeContaner">
       <h3>
         <%= covrg %>
@@ -38,6 +38,7 @@
       
 
       <div class="gallery" id="gallery">
+        
         <% files.forEach(function(file) { %>
           <% if(file.folder === covrg) { %>
             
@@ -116,8 +117,10 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
     document.getElementById('fileSearch').addEventListener('change',function () {
+      
+      document.getElementById('loaderContainer').style.display = 'flex';
+      console.log("enter search");
       // add image to tmp folder
-      console.log('search clicked');
       var image = event.target.files[0];
       if (image){
         var formData = new FormData();
@@ -150,10 +153,11 @@ document.addEventListener('DOMContentLoaded', function () {
           }
       }).then(data => {
           const files = data.files;
-          console.log('received files:',data);
           updateGallery(files); // Update the gallery with the search results
-      }).catch(err => console.error('Error:', err));
-
+          document.getElementById('loaderContainer').style.display = 'none';
+      }).catch(err => {console.error('Error:', err)
+      document.getElementById('loaderContainer').style.display = 'none';});
+      
       }
       
     });
