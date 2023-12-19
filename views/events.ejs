@@ -59,6 +59,8 @@
 
     </header>
 
+    <% if (userRole=="admin" ) { %>
+
     <div class="submiter">
         <div class="submationContaner"></div>
         
@@ -91,6 +93,7 @@
             <button type="submit">Add Event</button>
         </form>
     </div>
+    <% } %>
 
 
 
@@ -104,6 +107,7 @@
                 <div class="eventCard">
                     <div class="titlePar">
                         <span class="cardTitle"><%= event.title %></span>
+                        <% if(userRole == "user"){} %>
                         <button type="button" class="btn btn-outline-light btn-sm registerButton">Register</button>
                     </div>
             
@@ -118,26 +122,6 @@
                     </div>
                 </div>
                <%  }); %>
-
-            
-                <div class="eventCard">
-                    <div class="titlePar">
-                        <span class="cardTitle">Portrait photography</span>
-                        <button type="button" class="btn btn-outline-light btn-sm registerButton">Register</button>
-                    </div>
-
-                    <p class="cardcontent">Short course in portrait photography by Mr. Mohammad Shabeb<br>
-                        Don’t miss this chance <br>
-                        Note: “your attend count with non academic activities“
-                    </p>
-
-                    <div class="cardDetails">
-                        <span>Date: 7/10/2023</span>
-                        <span>Time: 7:30 PM</span>
-                        <span>Location: Building 19 - 210</span>
-                    </div>
-                </div>
-
 
 
             </div>

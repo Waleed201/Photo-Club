@@ -26,57 +26,5 @@
     "email": "user@admin",
     "password": "$2b$10$8nEPBwlW.Uf4vHZ861Gau.lM/14V8lVkQMXoBXbIBu4tpTlKILlV2",
     "role": "user"
-  },
-  {
-    "id": "1702770193452",
-    "name": "Waleed",
-    "email": "aannsq23@gmail.com",
-    "password": "$2b$10$GR.bAlhinlydJ0HyHvhILOIk0KgIHPi10wNdvKeJgRkOcLDXJ6.aK"
-  },
-  {
-    "id": "1702771009040",
-    "name": "Khaleed",
-    "email": "kk3@gmail.com",
-    "password": "$2b$10$LoCy/DdfP2HQxqpgtNNmTORT5M.nEOKrTXTSwNKgMJyab3v.eC8W2"
-  },
-  {
-    "id": "1702771888270",
-    "name": "moon",
-    "email": "moon@m",
-    "password": "$2b$10$6HgxDlYlZDR5U3.uFXfZFOTC2A1bckeYA.HhYXdTaw4mj6VfnFJaC",
-    "role": [
-      "visitor",
-      ""
-    ]
-  },
-  {
-    "id": "1702772089520",
-    "name": "w",
-    "email": "Waleed@w",
-    "password": "$2b$10$M3J1hlOxUbQ7Ednkfu9YEeh4xm2arJrFchbbGqOHsvs.XTvH2a7gq",
-    "role": [
-      "visitor",
-      ""
-    ]
-  },
-  {
-    "id": "1702834468373",
-    "name": "ISEclub",
-    "email": "iseclub@kfupm",
-    "password": "$2b$10$bErCvHAFj8pzd25MQIthGOQQ.JRz6M3C2Ifx0MrEbiKUscBHOm/2a",
-    "role": [
-      "on",
-      ""
-    ]
-  },
-  {
-    "id": "1702834690136",
-    "name": "COEclub",
-    "email": "COEclub@kfupm",
-    "password": "$2b$10$PghG.GME/f06uFIhNaCFBuCv/g5F03/GyWvwY67p3iQ3rov5Znkki",
-    "role": [
-      "club",
-      ""
-    ]
   }
 ]

@@ -1,6 +1,6 @@
 .eventCard {
     width: 365px;
-    height: 150px;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -27,8 +27,9 @@
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
-
     font-family: 'Inter', sans-serif;
+    height: 60px;
+    overflow: hidden;
 }
 
 .eventCard .registerButton{
@@ -47,7 +48,7 @@
     font-weight: 400;
     line-height: normal;
     opacity: 0.67;
-    white-space: nowrap;
+    height: 25px;
     overflow: hidden;
     text-overflow: ellipsis;
     margin-top: auto;
