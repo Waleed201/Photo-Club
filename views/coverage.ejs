@@ -70,7 +70,7 @@
         <input required type="text" name="folder" placeholder="folder name" class="form-control" >
       </form>
 
-      <% if (userRole=="admin" || userRole=="user" ) { %>
+      <% if (userRole=="admin" ) { %>
         <button type="button" id="addButton" class="btn btn-outline-primary">Add</button>
       <% } %>
       <button type="button" id="searchButton" class="btn btn-outline-secondary">Search</button>
@@ -238,11 +238,14 @@ document.addEventListener('DOMContentLoaded', function () {
       var downloadIcons = document.getElementsByClassName('downloadIcon');
       for (var i = 0; i < downloadIcons.length; i++) {
         downloadIcons[i].addEventListener('click', function () {
+          console.log("button ")
           var url = this.parentElement.parentElement.children[0].src;
           var link = document.createElement('a');
           link.href = url;
-          link.download = url.substr(url.lastIndexOf('/') + 1);
-          link.click();
+          //link.download = url.substr(url.lastIndexOf('/') + 1);
+          console.log(link)
+          console.log(link.click())
+          console.log("Done")
         });
       }
     }

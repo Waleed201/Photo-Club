@@ -26,5 +26,12 @@
     "email": "user@admin",
     "password": "$2b$10$8nEPBwlW.Uf4vHZ861Gau.lM/14V8lVkQMXoBXbIBu4tpTlKILlV2",
     "role": "user"
+  },
+  {
+    "id": "1703009057351",
+    "name": "Waleed",
+    "email": "Waleed@a",
+    "password": "$2b$10$MWPbJ9K5YNVL7EmRrrqHgekO7v/aTGNdboLcCqXmp8T43J356wRvW",
+    "role": "user"
   }
 ]

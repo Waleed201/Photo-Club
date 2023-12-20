@@ -58,11 +58,14 @@ function checkNotAuthenticated(req, res, next) {
   next();
 }
 
+
+
 module.exports = {
   initializePassport,
   checkAuthenticated,
   checkNotAuthenticatedTest,
   checkNotAuthenticated,
+  
   upload
 };
         

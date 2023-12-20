@@ -1,0 +1,25 @@
+-- -- SQLite
+-- CREATE TABLE Events (
+--     id INTEGER PRIMARY KEY AUTOINCREMENT,
+--     title TEXT NOT NULL,
+--     description TEXT NOT NULL,
+--     event_date DATE NOT NULL,
+--     event_time TIME NOT NULL,
+--     location TEXT NOT NULL
+-- );
+
+-- CREATE TABLE Users (
+--     id TEXT PRIMARY KEY,
+--     name TEXT NOT NULL,
+--     email TEXT NOT NULL,
+--     password TEXT NOT NULL,
+--     role TEXT NOT NULL CHECK (role IN ('admin', 'member', 'club', 'user'))
+-- );
+
+-- CREATE TABLE EventRegistrations (
+--     event_id INTEGER,
+--     user_id TEXT,
+--     PRIMARY KEY (event_id, user_id),
+--     FOREIGN KEY (event_id) REFERENCES Events(id),
+--     FOREIGN KEY (user_id) REFERENCES Users(id)
+-- );

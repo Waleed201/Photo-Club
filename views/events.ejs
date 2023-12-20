@@ -107,8 +107,9 @@
                 <div class="eventCard">
                     <div class="titlePar">
                         <span class="cardTitle"><%= event.title %></span>
-                        <% if(userRole == "user"){} %>
-                        <button type="button" class="btn btn-outline-light btn-sm registerButton">Register</button>
+                        <% if(userRole == "user"){ %>
+                            <button type="button" class="btn btn-outline-light btn-sm registerButton">Register</button>
+                            <% } %>
                     </div>
             
                     <p class="cardcontent">

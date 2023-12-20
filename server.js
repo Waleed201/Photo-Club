@@ -11,6 +11,8 @@ const axios = require('axios');
 const { initializePassport, checkAuthenticated, checkNotAuthenticatedTest, checkNotAuthenticated } = require('./utils');
 const userData = require('./userData');
 const eventData = require('./eventData');
+const router = express.Router();
+
 
 
 const app = express();
@@ -55,6 +57,15 @@ const getUserById = (id) => {
     return users.find(user => user.id === id);
 };
 
+function saveReturnTo(req, res, next) {
+  if (!req.isAuthenticated() && req.path !== '/login' && req.path !== '/register') {
+      req.session.returnTo = req.originalUrl;
+      console.log(req.session.returnTo)
+  }
+  next();
+}
+
+
 initializePassport(passport, getUserByEmail, getUserById);
 
 // Express app configuration
@@ -70,6 +81,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_method'));
+app.use(saveReturnTo)
 
 // Define your routes
 
@@ -112,8 +124,8 @@ app.get('/register', checkNotAuthenticatedTest, (req, res) => {
 });
 
 
-app.post('/register', checkNotAuthenticatedTest, async (req, res) => {
-    try {
+app.post('/register', checkNotAuthenticatedTest, async (req, res) => {  
+  try {
       const user = getUserByEmail(req.body.email);
       if (user) {
         req.flash('error', 'Email already exists');
@@ -137,7 +149,7 @@ app.post('/register', checkNotAuthenticatedTest, async (req, res) => {
 
   
 app.get('/login', checkNotAuthenticated, (req, res) => {
-    const isAuthenticated = req.isAuthenticated();
+  const isAuthenticated = req.isAuthenticated();
     if (isAuthenticated) {
         res.render('login', { userRole: req.user.role, userName: req.user.name });
     } else {
@@ -145,11 +157,38 @@ app.get('/login', checkNotAuthenticated, (req, res) => {
     }
 });
 
-app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/login',
-    failureFlash: true
-}));
+// app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
+//     successRedirect: '/',
+//     failureRedirect: '/login',
+//     failureFlash: true
+// }));
+
+
+app.post('/login', checkNotAuthenticated, (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+      if (err) { return next(err); }
+      if (!user) { 
+          // Authentication failed
+          return res.redirect('/login'); 
+      }
+      req.logIn(user, (err) => {
+          if (err) { return next(err); }
+          // Determine the redirect destination
+          console.log(req.session.returnTo)
+          let redirectTo = req.session.returnTo ? req.session.returnTo : '/';
+          delete req.session.returnTo;
+
+          // Prevent redirecting back to the registration page
+          if (redirectTo === '/register') {
+              redirectTo = '/';
+          }
+
+          return res.redirect(redirectTo);
+      });
+  })(req, res, next);
+});
+
+
 
 app.post('/logout', function (req, res, next) {
     req.logout(function (err) {
@@ -201,7 +240,7 @@ app.post('/search', async (req, res) => {
 
 
 
-  app.get('/coverages', (req, res) => {
+  app.get('/coverages', saveReturnTo,(req, res) => {
     const s3 = createS3Instance();
     const listParams = { Bucket: BUCKETNAME, Delimiter: '/' }; // Add Delimiter parameter to list only folders
     // List folders

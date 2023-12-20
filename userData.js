@@ -8,7 +8,7 @@ async function hashPassword(password) {
   return hashedPassword;
 }
 
-async function loadUsers() {
+function loadUsers() {
   try {
     const data = fs.readFileSync(usersFilePath, 'utf8');
     return JSON.parse(data);

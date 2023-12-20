@@ -398,7 +398,6 @@ body #cdawrap {
 	width: calc(1 / var(--grid-inner-scale) * 100%);
 	height: calc(1 / var(--grid-inner-scale) * 100%);
 	background-size: cover;
-	opacity: 0.8;
 	background-position: 50% 50%;
 }
 
