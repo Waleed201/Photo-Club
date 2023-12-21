@@ -27,7 +27,6 @@
     "package-json": "^8.1.1",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
-    "pip": "^0.0.1",
     "sharp": "^0.33.1"
   },
   "devDependencies": {
@@ -35,3 +34,4 @@
     "nodemon": "^3.0.2"
   }
 }
+    
