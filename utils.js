@@ -12,7 +12,7 @@ const upload = multer({ storage });
 function initializePassport(passport, getUserByEmail, getUserById) {
   passport.use(new LocalStrategy({ usernameField: 'email' },
     async (email, password, done) => {
-      const user = getUserByEmail(email);
+      const user = await getUserByEmail(email);
       if (user == null) {
         return done(null, false, { message: 'No user with that email' });
       }
@@ -30,9 +30,10 @@ function initializePassport(passport, getUserByEmail, getUserById) {
 
   passport.serializeUser((user, done) => done(null, user.id));
   passport.deserializeUser((id, done) => {
-    return done(null, getUserById(id));
-  });
-}
+    getUserById(id)
+      .then(user => done(null, user))
+      .catch(err => done(err));
+  });}
 
 // Authentication Middleware
 function checkAuthenticated(req, res, next) {
@@ -65,7 +66,6 @@ module.exports = {
   checkAuthenticated,
   checkNotAuthenticatedTest,
   checkNotAuthenticated,
-  
   upload
 };
         
