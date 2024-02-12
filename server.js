@@ -7,10 +7,10 @@ const session = require('express-session');
 const methodOverride = require('method-override');
 const multer = require('multer');
 const AWS = require('aws-sdk');
+
 const axios = require('axios');
-const { initializePassport, checkAuthenticated, checkNotAuthenticatedTest, checkNotAuthenticated } = require('./utils');
-// const userData = require('./userData');
-// const eventData = require('./eventData');
+const { initializePassport, checkAuthenticated, checkNotAuthenticatedTest, checkNotAuthenticated, compressImage} = require('./utils');
+
 const { insertUser,
   insertEvent,
   registerUserToEvent,
@@ -35,9 +35,16 @@ const app = express();
 
 // AWS S3 Configuration
 AWS.config.update({
+  // amazon
   accessKeyId: 'AKIAYGINPQ2H42KMVZM3',
   secretAccessKey: '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',
   region: 'eu-north-1'
+
+  // wasabi
+  // accessKeyId: 'IH74DRJCQGT6VP23DZ3M',
+  // secretAccessKey: 'iQ72JUWWzf17ve9g1oBtKAzUBK1cI6BCK2ksJ3t8',
+  // endpoint: 'https://s3.ap-southeast-1.wasabisys.com',
+  // s3ForcePathStyle: true
 });
 
 const BUCKETNAME = 'photo-club-s3';
@@ -45,6 +52,18 @@ const s3 = new AWS.S3();
 function createS3Instance() {
   return new AWS.S3();
 }
+
+// const wasabiConfig = {
+//   accessKeyId: 'IH74DRJCQGT6VP23DZ3M',
+//   secretAccessKey: 'iQ72JUWWzf17ve9g1oBtKAzUBK1cI6BCK2ksJ3t8',
+//   endpoint: 's3.wasabisys.com',  // Replace with the appropriate Wasabi endpoint
+//   s3ForcePathStyle: true,
+//   signatureVersion: 'v4',
+// };
+
+// const BUCKETNAME = 'photo-club-s3';
+// const wasabiS3 = new S3(wasabiConfig);
+
 
 
 // Multer Configuration for file uploads
@@ -279,6 +298,8 @@ app.get('/coverages', saveReturnTo, (req, res) => {
           folder: folderName,
           name: fileName,
           url: `https://${BUCKETNAME}.s3.amazonaws.com/${file.Key}`,
+      //  url: `https://s3.ap-southeast-1.wasabisys.com/${BUCKETNAME}/${file.Key}`,
+
           encodedurl: encodedFileName
         };
       });

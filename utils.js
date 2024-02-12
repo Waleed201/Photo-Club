@@ -60,12 +60,56 @@ function checkNotAuthenticated(req, res, next) {
 }
 
 
+function compressImage(file) {
+  return new Promise(resolve => {
+      const reader = new FileReader();
+
+      reader.onload = function(event) {
+          const img = new Image();
+          img.onload = function() {
+              const maxWidth = 800;
+              const maxHeight = 600;
+              let width = img.width;
+              let height = img.height;
+
+              if (width > height) {
+                  if (width > maxWidth) {
+                      height *= maxWidth / width;
+                      width = maxWidth;
+                  }
+              } else {
+                  if (height > maxHeight) {
+                      width *= maxHeight / height;
+                      height = maxHeight;
+                  }
+              }
+
+              canvas.width = width;
+              canvas.height = height;
+
+              ctx.clearRect(0, 0, width, height);
+              ctx.drawImage(img, 0, 0, width, height);
+
+              canvas.toBlob(blob => {
+                  resolve(blob);
+              }, 'image/jpeg', 0.7); // Adjust compression quality here (0.7 means 70% quality)
+          };
+          img.src = event.target.result;
+      };
+
+      reader.readAsDataURL(file);
+  });
+}
+
+
+
 
 module.exports = {
   initializePassport,
   checkAuthenticated,
   checkNotAuthenticatedTest,
   checkNotAuthenticated,
-  upload
+  // upload,
+  compressImage
 };
         
